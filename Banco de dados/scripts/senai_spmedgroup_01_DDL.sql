@@ -1,16 +1,17 @@
-CREATE DATABASE SPMEDGROUP;
+CREATE DATABASE SPMEDGROUP; -- Cria o banco de dados SPMEDGROUP
 GO
 
-USE SPMEDGROUP;
+USE SPMEDGROUP; -- Inicia a utilização do banco de dados
 GO
 
-CREATE TABLE tipoUsuario (
+
+CREATE TABLE tipoUsuario ( -- Cria a entidade tipoUsuario
 	idTipoUsuario TINYINT PRIMARY KEY IDENTITY,
 	nomeTipoUsuario VARCHAR(70) UNIQUE
 );
 GO
 
-CREATE TABLE clinica (
+CREATE TABLE clinica ( -- Cria a entidade clinica
 	idClinica SMALLINT PRIMARY KEY IDENTITY,
 	endClinica VARCHAR(200) NOT NULL,
 	cnpj CHAR(14) UNIQUE NOT NULL, 
@@ -21,19 +22,19 @@ CREATE TABLE clinica (
 );
 GO
 
-CREATE TABLE especialidade (
+CREATE TABLE especialidade ( -- Cria a entidade especialidade
 	idEspecialidade TINYINT PRIMARY KEY IDENTITY,
 	nomeEspecialidade VARCHAR(100) UNIQUE
 );
 GO
 
-CREATE TABLE situacao (
+CREATE TABLE situacao ( -- Cria a entidade situacao
 	idSituacao TINYINT PRIMARY KEY IDENTITY,
 	situacaoDesc VARCHAR(100)
 );
 GO
 
-CREATE TABLE usuario (
+CREATE TABLE usuario ( -- Cria a entidade usuario
 	idUsuario INT PRIMARY KEY IDENTITY,
 	idTipoUsuario TINYINT FOREIGN KEY REFERENCES tipoUsuario(idTipoUsuario) NOT NULL,
 	email VARCHAR(50) UNIQUE NOT NULL,
@@ -41,7 +42,7 @@ CREATE TABLE usuario (
 );
 GO
 
-CREATE TABLE paciente (
+CREATE TABLE paciente ( -- Cria a entidade paciente
 	idPaciente INT PRIMARY KEY IDENTITY,
 	idUsuario INT FOREIGN KEY REFERENCES usuario(idUsuario) UNIQUE NOT NULL,
 	nomePaciente VARCHAR(100) NOT NULL,
@@ -53,7 +54,7 @@ CREATE TABLE paciente (
 );
 GO
 
-CREATE TABLE medico (
+CREATE TABLE medico ( -- Cria a entidade medico
 	idMedico SMALLINT PRIMARY KEY IDENTITY,
 	idUsuario INT FOREIGN KEY REFERENCES usuario(idUsuario) UNIQUE NOT NULL,
 	idClinica SMALLINT FOREIGN KEY REFERENCES clinica(idClinica) NOT NULL,
@@ -63,7 +64,7 @@ CREATE TABLE medico (
 );
 GO
 
-CREATE TABLE consulta (
+CREATE TABLE consulta ( -- Cria a entidade consulta
 	idConsulta INT PRIMARY KEY IDENTITY,
 	idPaciente INT FOREIGN KEY REFERENCES paciente(idPaciente) NOT NULL,
 	idMedico SMALLINT FOREIGN KEY REFERENCES medico(idMedico) NOT NULL,
