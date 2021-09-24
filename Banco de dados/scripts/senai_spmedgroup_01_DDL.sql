@@ -74,6 +74,16 @@ CREATE TABLE consulta ( -- Cria a entidade consulta
 );
 GO
 
+CREATE TABLE ImagemPerfil (
+	idImagemPerfil INT PRIMARY KEY IDENTITY,
+	idUsuario INT FOREIGN KEY REFERENCES usuario(idUsuario) NOT NULL UNIQUE,
+	binario VARBINARY(MAX) NOT NULL,
+	dataCriacao DATETIME NOT NULL DEFAULT GetDate(),
+	mimeType VARCHAR(80) NOT NULL,
+	nomeArquivo VARCHAR(50) NOT NULL
+);
+GO
+
 
 
 
