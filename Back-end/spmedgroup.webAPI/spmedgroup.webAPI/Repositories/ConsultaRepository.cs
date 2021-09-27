@@ -97,7 +97,8 @@ namespace spmedgroup.webAPI.Repositories
                     List<Consultum> listaMedico = ctx.Consulta
                         .Include(x => x.IdPacienteNavigation)
                         .Include(x => x.IdSituacaoNavigation)
-                        .Where(x => x.IdMedico == medico.IdMedico)
+                        .Include(x => x.IdSituacaoNavigation)
+                        .Where(x => x.IdMedicoNavigation.IdUsuario == id || x.IdPacienteNavigation.IdUsuario == id)
                         .ToList();
                     return listaMedico;
 
