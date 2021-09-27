@@ -1,4 +1,6 @@
-﻿using spmedgroup.webAPI.Domains;
+﻿using Microsoft.EntityFrameworkCore;
+using spmedgroup.webAPI.Contexts;
+using spmedgroup.webAPI.Domains;
 using spmedgroup.webAPI.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,29 +11,49 @@ namespace spmedgroup.webAPI.Repositories
 {
     public class ClinicaRepository : IClinicaRepository
     {
+        SpMedGroupContext ctx = new SpMedGroupContext();
         public void Atualizar(int idClinica, Clinica novaClinica)
         {
-            throw new NotImplementedException();
+            Clinica clinica = BuscarPorId(idClinica);
+
+            if (clinica != null)
+            {
+                clinica.Cnpj = novaClinica.Cnpj;
+                clinica.EndClinica = novaClinica.EndClinica;
+                clinica.HoraAbertura = novaClinica.HoraAbertura;
+                clinica.HoraFechamento = novaClinica.HoraFechamento;
+                clinica.NomeFantasia = novaClinica.NomeFantasia;
+                clinica.RazaoSocial = clinica.RazaoSocial;
+            }
+            ctx.Clinicas.Update(clinica);
+            ctx.SaveChanges();
         }
 
         public Clinica BuscarPorId(int idClinica)
         {
-            throw new NotImplementedException();
+            return ctx.Clinicas.Include(x => x.Medicos).FirstOrDefault(x => x.IdClinica == idClinica);
         }
 
         public void Cadastrar(Clinica clinica)
         {
-            throw new NotImplementedException();
+            ctx.Clinicas.Add(clinica);
+            ctx.SaveChanges();
         }
 
         public void Deletar(int idClinica)
         {
-            throw new NotImplementedException();
+            Clinica clinica = BuscarPorId(idClinica);
+
+            if (clinica != null)
+            {
+                ctx.Clinicas.Remove(clinica);
+                ctx.SaveChanges();
+            }
         }
 
         public List<Clinica> ListarTodos()
         {
-            throw new NotImplementedException();
+            return ctx.Clinicas.Include(x => x.Medicos).ToList();
         }
     }
 }

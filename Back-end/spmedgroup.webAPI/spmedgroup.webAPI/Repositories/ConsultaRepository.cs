@@ -1,4 +1,6 @@
-﻿using spmedgroup.webAPI.Domains;
+﻿using Microsoft.EntityFrameworkCore;
+using spmedgroup.webAPI.Contexts;
+using spmedgroup.webAPI.Domains;
 using spmedgroup.webAPI.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,39 +11,108 @@ namespace spmedgroup.webAPI.Repositories
 {
     public class ConsultaRepository : IConsultaRepository
     {
+        SpMedGroupContext ctx = new SpMedGroupContext();
         public void Aprovacao(int idConsulta, string status)
         {
-            throw new NotImplementedException();
+            Consultum consulta = BuscarPorId(idConsulta);
+
+            switch (status)
+            {
+                case "1":
+                    consulta.IdSituacao = 1;
+                    break;
+                case "2":
+                    consulta.IdSituacao = 2;
+                    break;
+                case "3":
+                    consulta.IdSituacao = 3;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void Atualizar(int idConsulta, Consultum novaConsulta)
         {
-            throw new NotImplementedException();
+            Consultum consulta = BuscarPorId(idConsulta);
+
+            if (consulta != null)
+            {
+                consulta.ConsultaDesc = novaConsulta.ConsultaDesc;
+                consulta.DataConsulta = novaConsulta.DataConsulta;
+                consulta.IdMedico = novaConsulta.IdMedico;
+                consulta.IdPaciente = novaConsulta.IdPaciente;
+                consulta.IdSituacao = novaConsulta.IdSituacao;
+            }
+            ctx.Consulta.Update(consulta);
+            ctx.SaveChanges();
         }
 
         public Consultum BuscarPorId(int idConsulta)
         {
-            throw new NotImplementedException();
+            return ctx.Consulta
+                .Include(x => x.IdMedicoNavigation)
+                .Include(x => x.IdPacienteNavigation)
+                .Include(x => x.IdSituacaoNavigation)
+                .FirstOrDefault(x => x.IdConsulta == idConsulta);
         }
 
         public void Cadastrar(Consultum consulta)
         {
-            throw new NotImplementedException();
+            ctx.Consulta.Add(consulta);
+            ctx.SaveChanges();
         }
 
         public void Deletar(int idConsulta)
         {
-            throw new NotImplementedException();
+            Consultum consulta = BuscarPorId(idConsulta);
+
+            if (consulta != null)
+            {
+                ctx.Consulta.Remove(consulta);
+                ctx.SaveChanges();
+            }
         }
 
         public List<Consultum> ListarMinhas(int id)
         {
-            throw new NotImplementedException();
+            Usuario usuario = ctx.Usuarios.FirstOrDefault(x => x.IdUsuario == id);
+
+            switch (usuario.IdTipoUsuario)
+            {
+                case 1:
+                    return null;
+
+                case 2:
+                    Paciente paciente = ctx.Pacientes.FirstOrDefault(x => x.IdUsuario == id);
+                    List<Consultum> listaPaciente = ctx.Consulta
+                        .Include(x => x.IdMedicoNavigation)
+                        .Include(x => x.IdSituacaoNavigation)
+                        .Where(x => x.IdPaciente == paciente.IdPaciente)
+                        .ToList();
+                    return listaPaciente;
+
+                case 3:
+                    Medico medico = ctx.Medicos.FirstOrDefault(x => x.IdUsuario == id);
+                    List<Consultum> listaMedico = ctx.Consulta
+                        .Include(x => x.IdPacienteNavigation)
+                        .Include(x => x.IdSituacaoNavigation)
+                        .Where(x => x.IdMedico == medico.IdMedico)
+                        .ToList();
+                    return listaMedico;
+
+                default:
+                    return null;
+            }
         }
 
         public List<Consultum> ListarTodos()
         {
-            throw new NotImplementedException();
+            return ctx.Consulta
+                .Include(x => x.IdMedicoNavigation)
+                .Include(x => x.IdPacienteNavigation)
+                .Include(x => x.IdSituacaoNavigation)
+                .ToList();
         }
     }
 }

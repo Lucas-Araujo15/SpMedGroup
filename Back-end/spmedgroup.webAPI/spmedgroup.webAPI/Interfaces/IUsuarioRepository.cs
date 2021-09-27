@@ -44,10 +44,10 @@ namespace spmedgroup.webAPI.Interfaces
         /// <summary>
         /// Busca um usuário específico
         /// </summary>
-        /// <param name="emain">Email do usuário</param>
+        /// <param name="email">Email do usuário</param>
         /// <param name="senha">Senha do usuário</param>
         /// <returns>Objeto Usuario correspondente as credenciais informadas</returns>
-        Usuario Login(string emain, string senha);
+        Usuario Login(string email, string senha);
 
         /// <summary>
         /// Cadastra uma imagem no banco
