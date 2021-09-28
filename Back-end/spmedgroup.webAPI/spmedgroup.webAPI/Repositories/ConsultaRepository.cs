@@ -30,6 +30,9 @@ namespace spmedgroup.webAPI.Repositories
                 default:
                     break;
             }
+
+            ctx.Consulta.Update(consulta);
+            ctx.SaveChanges();
         }
 
         public void Atualizar(int idConsulta, Consultum novaConsulta)
@@ -72,6 +75,14 @@ namespace spmedgroup.webAPI.Repositories
                 ctx.Consulta.Remove(consulta);
                 ctx.SaveChanges();
             }
+        }
+
+        public void InserirDesc(int idConsulta, string descricao)
+        {
+            Consultum consultaAlteracao = BuscarPorId(idConsulta);
+            consultaAlteracao.ConsultaDesc = descricao;
+            ctx.Consulta.Update(consultaAlteracao);
+            ctx.SaveChanges();
         }
 
         public List<Consultum> ListarMinhas(int id)

@@ -54,6 +54,11 @@ namespace spmedgroup.webAPI.Interfaces
         /// <param name="status">Novo status para a consulta</param>
         void Aprovacao(int idConsulta, string status);
 
-
+        /// <summary>
+        /// Insere uma descrição a uma consulta específica
+        /// </summary>
+        /// <param name="idConsulta">ID da consulta</param>
+        /// <param name="descricao">Descrição da consulta</param>
+        void InserirDesc(int idConsulta, string descricao);
     }
 }
