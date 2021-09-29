@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using spmedgroup.webAPI.Domains;
 using spmedgroup.webAPI.Interfaces;
@@ -58,7 +57,7 @@ namespace spmedgroup.webAPI.Controllers
             });
         }
 
-        [HttpPut("atualizar/{id}")]
+        [HttpPut("{id}")]
         public IActionResult Atualizar(int id, Medico medico)
         {
             if (medico.Crm == null || medico.IdClinica == 0 || medico.IdEspecialidade == 0 || medico.IdUsuario == 0 || medico.NomeMedico == null)

@@ -1,16 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using spmedgroup.webAPI.Domains;
 using spmedgroup.webAPI.Interfaces;
 using spmedgroup.webAPI.Repositories;
 using spmedgroup.webAPI.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace spmedgroup.webAPI.Controllers
 {

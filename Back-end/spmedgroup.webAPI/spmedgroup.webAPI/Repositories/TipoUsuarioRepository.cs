@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace spmedgroup.webAPI.Repositories
 {
+    /// <summary>
+    /// Repositório responsável pelos tipos de usuário
+    /// </summary>
     public class TipoUsuarioRepository : ITipoUsuarioRepository
     {
         SpMedGroupContext ctx = new SpMedGroupContext();

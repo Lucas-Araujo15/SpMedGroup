@@ -1,13 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using spmedgroup.webAPI.Domains;
 using spmedgroup.webAPI.Interfaces;
 using spmedgroup.webAPI.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace spmedgroup.webAPI.Controllers
 {
@@ -27,7 +23,7 @@ namespace spmedgroup.webAPI.Controllers
         [HttpPost]
         public IActionResult Cadastrar(Paciente paciente)
         {
-            if (paciente.CpfPaciente == null || paciente.EndPaciente == null || paciente.IdUsuario == 0 || paciente.NomePaciente == null || paciente.RgPaciente == null || paciente.TelPaciente == null)
+            if (paciente.CpfPaciente == null || paciente.EndPaciente == null || paciente.IdUsuario == 0 || paciente.NomePaciente == null || paciente.RgPaciente == null)
             {
                 return BadRequest(new
                 {
@@ -61,10 +57,10 @@ namespace spmedgroup.webAPI.Controllers
             });
         }
 
-        [HttpPut("atualizar/{id}")]
+        [HttpPut("{id}")]
         public IActionResult Atualizar(int id, Paciente paciente)
         {
-            if (paciente.CpfPaciente == null || paciente.EndPaciente == null || paciente.IdUsuario == 0 || paciente.NomePaciente == null || paciente.RgPaciente == null || paciente.TelPaciente == null)
+            if (paciente.CpfPaciente == null || paciente.EndPaciente == null || paciente.IdUsuario == 0 || paciente.NomePaciente == null || paciente.RgPaciente == null)
             {
                 return BadRequest(new
                 {

@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace spmedgroup.webAPI.Repositories
 {
+    /// <summary>
+    /// Repositório responsável pelos pacientes
+    /// </summary>
     public class PacienteRepository : IPacienteRepository
     {
         SpMedGroupContext ctx = new SpMedGroupContext();

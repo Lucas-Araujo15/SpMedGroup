@@ -5,10 +5,8 @@ using spmedgroup.webAPI.Domains;
 using spmedgroup.webAPI.Interfaces;
 using spmedgroup.webAPI.Repositories;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace spmedgroup.webAPI.Controllers
 {
@@ -103,7 +101,7 @@ namespace spmedgroup.webAPI.Controllers
         }
 
         [Authorize(Roles = "1")]
-        [HttpPut("atualizar/{id}")]
+        [HttpPut("{id}")]
         public IActionResult Atualizar(int id, Consultum consulta)
         {
             if (consulta.IdMedico == 0 || consulta.IdPaciente == 0 || consulta.IdSituacao == 0)
@@ -125,7 +123,7 @@ namespace spmedgroup.webAPI.Controllers
             {
                 return BadRequest(new
                 {
-                    mensagem = "A consulta indicada não foi encontrada."
+                    mensagem = "A consulta indicada não foi encontrada.",
                     error
                 });
             }

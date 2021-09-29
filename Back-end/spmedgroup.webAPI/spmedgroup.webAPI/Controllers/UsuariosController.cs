@@ -63,7 +63,7 @@ namespace spmedgroup.webAPI.Controllers
         }
 
         [Authorize]
-        [HttpPut("atualizar/{id}")]
+        [HttpPut("{id}")]
         public IActionResult Atualizar(int id, Usuario usuario)
         {
             if (usuario.Email == null || usuario.IdTipoUsuario == 0 || usuario.Senha == null)
@@ -97,7 +97,7 @@ namespace spmedgroup.webAPI.Controllers
         {
             try
             {
-                if (arquivo.Length > 50000)
+                if (arquivo.Length > 500000)
                     return BadRequest(new { mensagem = "O tamanho máximo da imagem foi atingido." });
 
                 string extensao = arquivo.FileName.Split('.').Last();
@@ -142,7 +142,7 @@ namespace spmedgroup.webAPI.Controllers
         {
             try
             {
-                if (arquivo.Length > 5000)
+                if (arquivo.Length > 500000)
                     return BadRequest(new { mensagem = "O tamanho máximo da imagem foi atingido." });
 
                 string extensao = arquivo.FileName.Split('.').Last();
@@ -180,6 +180,23 @@ namespace spmedgroup.webAPI.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Deletar(int id)
+        {
+            Usuario usuarioBuscado = usuarioRepository.BuscarPorId(id);
+
+            if (usuarioBuscado != null)
+            {
+                usuarioRepository.Deletar(id);
+                return Ok();
+            }
+
+            return NotFound(new
+            {
+                mensagem = "O usuário não foi encontrado."
+            });
         }
     }
 }

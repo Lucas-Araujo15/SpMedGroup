@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace spmedgroup.webAPI.Interfaces
 {
+    /// <summary>
+    /// Interface responsável pelo ConsultaRepository
+    /// </summary>
     interface IConsultaRepository
     {
         /// <summary>

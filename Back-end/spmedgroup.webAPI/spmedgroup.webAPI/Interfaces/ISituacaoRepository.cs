@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace spmedgroup.webAPI.Interfaces
 {
+    /// <summary>
+    /// Interface responsável pelo SituacaoRepository
+    /// </summary>
     interface ISituacaoRepository
     {
         /// <summary>

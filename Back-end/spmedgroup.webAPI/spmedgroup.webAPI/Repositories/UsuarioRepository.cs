@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace spmedgroup.webAPI.Repositories
 {
+    /// <summary>
+    /// Repositório responsável pelos usuários
+    /// </summary>
     public class UsuarioRepository : IUsuarioRepository
     {
         SpMedGroupContext ctx = new SpMedGroupContext();
