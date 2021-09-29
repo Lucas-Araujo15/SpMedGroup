@@ -182,6 +182,7 @@ namespace spmedgroup.webAPI.Controllers
             }
         }
 
+        [Authorize(Roles = "1")]
         [HttpDelete("{id}")]
         public IActionResult Deletar(int id)
         {
