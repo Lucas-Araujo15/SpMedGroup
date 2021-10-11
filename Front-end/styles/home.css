@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@500;700&display=swap');
+
+*{
+    padding:0;
+    margin:0;
+    border: none;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #FFFFFF;
+}
+
+header{
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+}
+
+.grid{
+    width: 90rem;
+}
+
+.box-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.box-header img{
+    width: 55px;
+    height: 59px;
+}
+
+.box-header nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 950px;
+}
+
+.box-header a{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 30px;
+    text-transform: uppercase;
+    color: black;
+}
+
+.box-header a:nth-child(5){
+    border: 3px solid #4EC596;
+    border-radius: 41px;
+    width: 170px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner{
+    background: linear-gradient(90.14deg, #87FFDE -0.77%, rgba(86, 232, 216, 0.58) 36.75%, rgba(86, 232, 216, 0.38) 78.96%, rgba(12, 232, 217, 0.15) 99.27%, rgba(86, 232, 216, 0) 99.28%), url(../assets/banner.png);
+    width: 100%;
+    height: 870px;
+    border-radius: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner div{
+    width: 1604px;
+    height: 545px;
+}
+
+.banner button{
+    margin-top: 55px;
+}
+
+h1, .banner p{
+    font-family: Poppins;
+    font-style: normal;
+    color: #FFFFFF;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+    width: 945px;
+}
+
+h1{
+    font-weight: 800;
+    font-size: 90px;
+    line-height: 135px;
+}
+
+.banner p{
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 60px;
+}
+
+.banner button{
+    background: #61C8FF;
+    border-radius: 50px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 54px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.4));
+    width: 244px;
+    height: 69px;
+}
+
+.acoes{
+    width: 100%;
+    height: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.acoes h2{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 80px;
+    line-height: 120px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #52D6C0;
+}
+
+.box-acoes{
+    width: 331px;
+    height: 397px;
+    left: 795px;
+    top: 1393px;
+    background: #FFFFFF;
+    border-radius: 20px;
+    filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.4));
+}
+
+.box-acoes div{
+    border-radius: 20px 20px 0px 0px;
+    height: 209px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blocos{
+    display: flex;
+    justify-content: space-between;
+}
+
+.box2{
+    background: linear-gradient(0deg, rgba(131, 252, 220, 0.49), rgba(131, 252, 220, 0.49)), url(../assets/imagem-paciente.jpg);
+    background-size: 331px 209px;
+}
+
+.box1{
+    background: linear-gradient(0deg, rgba(131, 252, 220, 0.49), rgba(131, 252, 220, 0.49)), url(../assets/imagem-medico.jpg);
+    background-position: center;
+    background-size: 332px 431px;
+}
+
+.box{
+    background: linear-gradient(0deg, rgba(131, 252, 220, 0.49), rgba(131, 252, 220, 0.49)), url(../assets/imagem-exames.jpg);
+    background-position: center;
+    background-size: 332px 431px;
+}
+
+.box-acoes span{
+    width: 100%;
+    height: 188px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 60px;
+    text-align: center;
+    color: #83FCDC;
+}
+
+.blocos a:hover, .box-consulta:hover{
+    -webkit-transform: scale(1.5);
+    transform: scale(1.1);
+}
+
+.blocos a{
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.box-consulta{
+    background: linear-gradient(270.54deg, #52D6C0 50.47%, rgba(131, 252, 220, 0) 117.73%);
+    height: 150px;
+    width: 100%;
+    border-radius: 20px;
+    filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.4));
+    transition: all 0.5s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box-consulta a{
+    color: #DFDFDF;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 66px;
+    line-height: 99px;
+}
+
+.container-acoes{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+}
