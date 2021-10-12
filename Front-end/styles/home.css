@@ -121,6 +121,7 @@ h1{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 40px;
 }
 
 .acoes h2{
@@ -228,4 +229,37 @@ h1{
     flex-direction: column;
     justify-content: space-evenly;
     height: 100%;
+}
+
+.sobre{
+    height: 900px;
+    background: linear-gradient(0deg, rgba(61, 155, 145, 0.35), rgba(61, 155, 145, 0.35)), url(../assets/sobre.png);
+    background-position: center;
+    border-radius: 80px 0px 0px 80px;
+    margin-left: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.texto-sobre h2{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 80px;
+    line-height: 120px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.texto-sobre p{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 75px;
+    color: #FFFFFF;
+
 }
