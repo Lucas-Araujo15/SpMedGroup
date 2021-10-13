@@ -64,6 +64,7 @@ header{
 .banner{
     background: linear-gradient(90.14deg, #87FFDE -0.77%, rgba(86, 232, 216, 0.58) 36.75%, rgba(86, 232, 216, 0.38) 78.96%, rgba(12, 232, 217, 0.15) 99.27%, rgba(86, 232, 216, 0) 99.28%), url(../assets/banner.png);
     width: 100%;
+    background-attachment: fixed;
     height: 870px;
     border-radius: 80px;
     display: flex;
@@ -234,6 +235,7 @@ h1{
 .sobre{
     height: 900px;
     background: linear-gradient(0deg, rgba(61, 155, 145, 0.35), rgba(61, 155, 145, 0.35)), url(../assets/sobre.png);
+    background-attachment: fixed;
     background-position: center;
     border-radius: 80px 0px 0px 80px;
     margin-left: 130px;
@@ -262,4 +264,10 @@ h1{
     line-height: 75px;
     color: #FFFFFF;
 
+}
+
+
+.teste{
+    height: 800px;
+    background-color: blue;
 }
