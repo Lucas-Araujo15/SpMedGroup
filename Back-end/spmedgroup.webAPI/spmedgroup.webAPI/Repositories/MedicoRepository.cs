@@ -20,7 +20,7 @@ namespace spmedgroup.webAPI.Repositories
         {
             Medico medico = BuscarPorId(idMedico);
 
-            if(medico != null)
+            if (medico != null)
             {
                 medico.Crm = novoMedico.Crm;
                 medico.IdClinica = novoMedico.IdClinica;
@@ -61,12 +61,26 @@ namespace spmedgroup.webAPI.Repositories
 
         public List<Medico> ListarTodos()
         {
-            return ctx.Medicos
-                .Include(x => x.Consulta)
-                .Include(x => x.IdClinicaNavigation)
-                .Include(x => x.IdEspecialidadeNavigation)
-                .Include(x => x.IdUsuarioNavigation)
-                .ToList();
+            return ctx.Medicos.Select(m => new Medico()
+            {
+                IdMedico = m.IdMedico,
+                NomeMedico = m.NomeMedico,
+                Crm = m.Crm,
+
+                IdClinicaNavigation = new Clinica()
+                {
+                    NomeFantasia = m.IdClinicaNavigation.NomeFantasia,
+                    EndClinica = m.IdClinicaNavigation.EndClinica,
+                    Cnpj = m.IdClinicaNavigation.Cnpj
+                },
+
+                IdEspecialidadeNavigation = new Especialidade()
+                {
+                    NomeEspecialidade = m.IdEspecialidadeNavigation.NomeEspecialidade
+                },
+
+                Consulta = m.Consulta
+            }).ToList();
         }
     }
 }

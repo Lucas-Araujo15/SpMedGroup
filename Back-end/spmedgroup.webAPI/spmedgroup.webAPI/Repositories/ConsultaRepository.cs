@@ -123,11 +123,45 @@ namespace spmedgroup.webAPI.Repositories
 
         public List<Consultum> ListarTodos()
         {
-            return ctx.Consulta
-                .Include(x => x.IdMedicoNavigation)
-                .Include(x => x.IdPacienteNavigation)
-                .Include(x => x.IdSituacaoNavigation)
-                .ToList();
+
+            return ctx.Consulta.Select(c => new Consultum()
+            {
+                IdConsulta = c.IdConsulta,
+                IdMedico = c.IdMedico,
+                IdPaciente = c.IdPaciente,
+                IdSituacao = c.IdSituacao,
+                ConsultaDesc = c.ConsultaDesc,
+                DataConsulta = c.DataConsulta,
+
+                IdMedicoNavigation = new Medico()
+                {
+                    NomeMedico = c.IdMedicoNavigation.NomeMedico,
+                    Crm = c.IdMedicoNavigation.Crm,
+
+                    IdClinicaNavigation = new Clinica()
+                    {
+                        NomeFantasia = c.IdMedicoNavigation.IdClinicaNavigation.NomeFantasia
+                    },
+
+                    IdEspecialidadeNavigation = new Especialidade()
+                    {
+                        NomeEspecialidade = c.IdMedicoNavigation.IdEspecialidadeNavigation.NomeEspecialidade,
+                    }
+                },
+
+                IdPacienteNavigation = new Paciente()
+                {
+                    NomePaciente = c.IdPacienteNavigation.NomePaciente,
+                    RgPaciente = c.IdPacienteNavigation.RgPaciente,
+                    CpfPaciente = c.IdPacienteNavigation.CpfPaciente,
+                    TelPaciente = c.IdPacienteNavigation.TelPaciente,
+                },
+
+                IdSituacaoNavigation = new Situacao()
+                {
+                    SituacaoDesc = c.IdSituacaoNavigation.SituacaoDesc
+                }
+            }).ToList();
         }
     }
 }

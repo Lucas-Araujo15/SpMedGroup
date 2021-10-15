@@ -85,12 +85,42 @@ namespace spmedgroup.webAPI.Repositories
 
         public List<Usuario> ListarTodos()
         {
-            return ctx.Usuarios
-                .Include(x => x.Medico)
-                .Include(x => x.Paciente)
-                .Include(x => x.IdTipoUsuarioNavigation)
-                .Include(x => x.ImagemPerfil)
-                .ToList();
+            return ctx.Usuarios.Select(u => new Usuario()
+            {
+                IdUsuario = u.IdUsuario,
+                IdTipoUsuario = u.IdTipoUsuario,
+                Email = u.Email,
+
+                ImagemPerfil = new ImagemPerfil()
+                {
+                    Binario = u.ImagemPerfil.Binario
+                },
+
+                IdTipoUsuarioNavigation = new TipoUsuario()
+                {
+                    NomeTipoUsuario = u.IdTipoUsuarioNavigation.NomeTipoUsuario
+                },
+
+                Medico = new Medico()
+                {
+                    NomeMedico = u.Medico.NomeMedico,
+                    Crm = u.Medico.Crm,
+                },
+
+                Paciente = new Paciente()
+                {
+                    NomePaciente = u.Paciente.NomePaciente,
+                    RgPaciente = u.Paciente.RgPaciente
+                }
+
+            }).ToList();
+
+            //return ctx.Usuarios
+            //    .Include(x => x.Medico)
+            //    .Include(x => x.Paciente)
+            //    .Include(x => x.IdTipoUsuarioNavigation)
+            //    .Include(x => x.ImagemPerfil)
+            //    .ToList();
         }
 
         public Usuario Login(string email, string senha)
