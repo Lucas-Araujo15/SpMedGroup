@@ -266,8 +266,37 @@ h1{
 
 }
 
+.depoimentos{
+    height: 575px;
+    background-color: #4EC596;
+    border-radius: 0px 80px 80px 0px;
+    margin-right: 130px;
+    margin-top: 200px;
+    background: linear-gradient(0deg, rgba(86, 232, 216, 0.35), rgba(86, 232, 216, 0.35)), url(../assets/imagem-depoimentos.png);
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
 
 .teste{
+    color: blueviolet;
     height: 800px;
-    background-color: blue;
+}
+
+.depoimentos img{
+    width: 103px;
+    height: 103px;
+    border-radius: 80px;
+}
+
+.dpoContent p{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 45px;
+    font-size: 30px;
+    color: #FFFFFF;
+
 }
