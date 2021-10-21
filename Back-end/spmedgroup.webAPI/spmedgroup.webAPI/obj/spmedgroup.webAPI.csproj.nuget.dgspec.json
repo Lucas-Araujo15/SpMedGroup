@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lucas Araujo\\Desktop\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\spmedgroup.webAPI.csproj": {}
+    "C:\\Users\\Lucas Araujo\\OneDrive\\Área de Trabalho\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\spmedgroup.webAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lucas Araujo\\Desktop\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\spmedgroup.webAPI.csproj": {
+    "C:\\Users\\Lucas Araujo\\OneDrive\\Área de Trabalho\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\spmedgroup.webAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lucas Araujo\\Desktop\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\spmedgroup.webAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Lucas Araujo\\OneDrive\\Área de Trabalho\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\spmedgroup.webAPI.csproj",
         "projectName": "spmedgroup.webAPI",
-        "projectPath": "C:\\Users\\Lucas Araujo\\Desktop\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\spmedgroup.webAPI.csproj",
+        "projectPath": "C:\\Users\\Lucas Araujo\\OneDrive\\Área de Trabalho\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\spmedgroup.webAPI.csproj",
         "packagesPath": "C:\\Users\\Lucas Araujo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lucas Araujo\\Desktop\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\obj\\",
+        "outputPath": "C:\\Users\\Lucas Araujo\\OneDrive\\Área de Trabalho\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Lucas Araujo\\AppData\\Roaming\\NuGet\\NuGet.Config",
