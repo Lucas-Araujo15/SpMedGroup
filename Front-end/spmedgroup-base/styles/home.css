@@ -10,6 +10,7 @@
 
 body{
     background-color: #FFFFFF;
+    overflow-x: hidden;
 }
 
 header{
@@ -322,7 +323,7 @@ h1{
 }
 
 .box-depoimento{
-    width: 1200px;
+    width: 75rem;
 }
 
 .fas{
@@ -398,4 +399,78 @@ h1{
     border-radius: 0px 80px;
     background: linear-gradient(0deg, rgba(5, 151, 242, 0.56), rgba(5, 151, 242, 0.56)), url(../assets/imagem-ambulancia.png);
     background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.extra img{
+    border-radius: 90px 90px 0px 90px;
+    height: 556px;
+    width: 578px;
+}
+
+.extra div:nth-child(1){
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.extra h2{
+    font-weight: bold;
+    font-size: 50px;
+    
+}
+
+.extra h2, p {
+    font-style: normal;
+    font-family: Poppins;
+    color: #FFFFFF;
+}
+
+.extra p{
+    font-weight: normal;
+    font-size: 32px;
+    
+}
+
+.extra div:nth-child(2){
+    width: 50rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 30rem
+}
+
+.extra button{
+    border: 3px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 40px;
+    height: 80px;
+    width: 381px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 46px;
+    background:transparent;
+    color: #FFFFFF;
+}
+
+.localizacao{
+    height: 1260px;
+}
+
+.box-localizacao{
+    display: flex;
+    align-items: center;
+}
+
+.forms-localizacao{
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.forms-localizacao form{
+    display: flex;
+    flex-direction: column;
 }
