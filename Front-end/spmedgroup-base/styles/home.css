@@ -457,7 +457,11 @@ h1{
 }
 
 .localizacao{
-    height: 1260px;
+    height: 1100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .box-localizacao{
@@ -465,12 +469,73 @@ h1{
     align-items: center;
 }
 
+.box-localizacao img{
+    width: 720px;
+    height: 569px;
+}
+
+.box-localizacao div, .box-localizacao img{
+    width: 720px;
+    height: 569px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
 .forms-localizacao{
     flex-direction: column;
     justify-content: flex-start;
+    background-color: #FFFFFF
 }
 
 .forms-localizacao form{
     display: flex;
     flex-direction: column;
+}
+
+.localizacao h2{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 80px;
+    text-transform: uppercase;
+    color:#4EC596;
+}
+
+.forms-localizacao div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.forms-localizacao h3{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 42px;
+    color: #000000;
+}
+
+.forms-localizacao input{
+    border: 4px solid #323232;
+    box-sizing: border-box;
+    border-radius: 40px;
+    height: 74px;
+    width: 445px;
+    font-family: Poppins;
+    font-weight: 200;
+    font-size: 30px;
+    padding: 10px;
+}
+
+.forms-localizacao button{
+    width: 445px;
+    height: 74px;
+    background: #4EC596;
+    border-radius: 40px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    color: #FFFFFF;
+
 }
