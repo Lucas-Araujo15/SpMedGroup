@@ -11,6 +11,7 @@
 body{
     background-color: #FFFFFF;
     overflow-x: hidden;
+    object-fit: cover;
 }
 
 header{
@@ -470,11 +471,12 @@ h1{
 }
 
 .box-localizacao img{
+    border-radius: 20px 0px 0px 20px;
     width: 720px;
     height: 569px;
 }
 
-.box-localizacao div, .box-localizacao img{
+.box-localizacao div:nth-child(2), .box-localizacao img{
     width: 720px;
     height: 569px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
@@ -482,13 +484,17 @@ h1{
 
 .forms-localizacao{
     flex-direction: column;
-    justify-content: flex-start;
-    background-color: #FFFFFF
+    display: flex;
+    justify-content: center;
+    background-color: #FFFFFF;
+    border-radius: 0px 20px 20px 0px;
 }
 
 .forms-localizacao form{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    height: 170px;
 }
 
 .localizacao h2{
@@ -503,8 +509,9 @@ h1{
 .forms-localizacao div {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
+    height: 345px;
 }
 
 .forms-localizacao h3{
@@ -537,5 +544,36 @@ h1{
     font-weight: bold;
     font-size: 30px;
     color: #FFFFFF;
+}
 
+.elipse{
+    position: absolute;
+    width: 866px;
+    height: 853px;
+    top: 6000px;
+    z-index: -1;
+    left: 65vw;
+}
+
+footer{
+    box-shadow: 0px -5px 20px rgba(0, 0, 0, 0.16);
+    background: #FFFFFF;
+    height: 91px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.rodape{
+    display: flex;
+    justify-content: center;
+}
+
+.rodape span{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    text-transform: uppercase;
 }
