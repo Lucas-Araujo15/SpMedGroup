@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Rock+Salt&display=swap');
+
+.box-pesquisa button{
+    background: #4EC596;
+    border-radius: 30px;
+    height: 51px;
+    width: 180px;
+}
+
+.banner-adm{
+    height: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner-container{
+    background: linear-gradient(0deg, rgba(86, 232, 216, 0.52), rgba(86, 232, 216, 0.52)), url(../img/img-page-adm.png);
+    border-radius: 30px;
+    height: 354px;
+    width: 92%;
+    filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.23));
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.banner-container div:nth-child(1){
+    width: 100%;
+    height: 74%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.abas{
+    height: 51px;
+    width: 85%;
+    background-color: #4EC596;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.abas nav{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.abas a{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 48px;
+    color: #FFFFFF
+}
+
+.cadastro{  
+    height: 740px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-cadastro{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.container-cadastro input{
+    border: 3px solid #8A8A8A;
+    box-sizing: border-box;
+    border-radius: 10px;
+    height: 59px;
+    width: 670px;
+}
+
+.container-cadastro input:focus{
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+
+.container-cadastro label{
+    width: 80px;
+}
+
+.box-cadastro{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 58%;
+    height: 335px;
+}
+
+.box-form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 540px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+}
+
+.box-form form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 435px;
+}
+
+.box-cadastro label{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.buttons-cadastro{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons-cadastro button{
+    border-radius: 10px;
+    width: 194px;
+    height: 60px;
+    font-family: Poppins;
+    font-style: normal;
+    font-size: 26px; 
+    font-weight: normal;
+}
+
+.buttons-cadastro button:nth-child(1){
+    border: 4px solid #4EC596;
+    box-sizing: border-box;
+    color: #4EC596;
+    background-color: transparent;
+}
+
+.buttons-cadastro button:nth-child(2){
+    background: #4EC596;
+    border-radius: 10px;
+    color: #FFFFFF;
+}
+
+.buttons-cadastro div{
+    display: flex;
+    justify-content: space-between;
+    width: 425px;
+}
+
+.btn-cadastrar{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-cadastrar button{
+    width: 340px;
+    height: 72px;
+    background: #4EC596;
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+}
+
+.buscas{
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-buscas input{
+    border-radius: 10px 0px 0px 10px;
+    height: 100%;
+    width: 90%;
+   
+}
+
+.box-buscas{
+    border-radius: 10px;
+    width: 60%;
+    display: flex;
+    height: 75px;
+    box-shadow: 0px 4px 9px rgba(0, 0, 0, 0.45);
+}
+
+.box-buscas div{
+    background: #4EC596;
+    border-radius: 0px 10px 10px 0px;
+    height: 100%;
+    width: 10%;
+}
+
+.container-buscas{
+    display: flex;
+    justify-content: space-between;
+}
+
+.container-buscas button{
+    border-radius: 10px;
+    background: #4EC596;
+    width: 200px;
+    height: 75px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    color: #FFFFFF;
+}
