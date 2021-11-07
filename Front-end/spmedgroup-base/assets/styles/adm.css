@@ -197,8 +197,18 @@
     border-radius: 10px 0px 0px 10px;
     height: 100%;
     width: 90%;
-   
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    padding-left: 10px;
 }
+
+.box-buscas input:focus{
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+
 
 .box-buscas{
     border-radius: 10px;
@@ -231,3 +241,170 @@
     font-size: 26px;
     color: #FFFFFF;
 }
+
+.box-lista{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    height: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.lista{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 1365px;
+    align-items: center;
+}
+
+.status div:nth-child(1){
+    background: #36936E;
+    border-radius: 0px 0px 0px 10px;
+    height: 100%;
+    width: 197px;
+}
+
+.status div{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    height: 50px;
+}
+
+.status div:nth-child(2){
+    border-radius: 0px 10px 0px 0px;
+    background: #4EC596;
+    width: 51px;
+    height: 100%;
+}
+.tabela{
+    width: 100%;
+}
+
+.tabela th{
+    text-align: start;
+}
+
+.tabela tr{
+    display: flex;
+}
+
+.tabela th, td{
+    font-family: Roboto;
+    font-size: 23px;
+    font-style: normal;
+}
+
+.tabela th{
+    font-weight: bold;
+}
+
+.tabela td{
+    padding-left: 10px;
+}
+
+.box-lista tbody{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 665px;
+}
+
+.tabela{
+    padding-left: 20px;
+}
+
+.tabela tr:nth-child(10){
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.tabela textarea{
+    border: 4px solid #C2C2C2;
+    box-sizing: border-box;
+    border-radius: 10px;
+    width: 98%;
+    height: 217px;
+    resize: none;
+    text-align: justify;
+    padding: 10px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+}
+
+.acoes{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20px;
+}
+
+.acoes button{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    background-color: transparent;
+}
+
+.acoes button:nth-child(1){
+    color: #284EAE;
+}
+
+.acoes button:nth-child(2){
+    color: #FF0000;
+}
+
+.acoes button:nth-child(3){
+    color: #6D6D6D;
+}
+
+.acoes div{
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/*BLOCO MINIMIZADO - RASCUNHO-----------------------------------------------------*/
+
+
+.box-lista2{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.box-lista2 tbody{
+    flex-direction:row;
+    width: 100%;
+    padding-right: 20px;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+}
+
+
