@@ -113,3 +113,146 @@
     font-size: 26px;
     color: #FFFFFF;
 }
+
+.box-lista-pac{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    height: 610px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.lista-pac{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 1165px;
+    align-items: center;
+}
+
+.status-pac div{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-pac{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    height: 50px;
+}
+
+.status-pac div{
+    border-radius: 0px 10px;
+    background: #66ADA5;
+    width: 51px;
+    height: 100%;
+}
+.tabela-pac{
+    width: 100%;
+}
+
+.tabela-pac th{
+    text-align: start;
+}
+
+.tabela-pac tr{
+    display: flex;
+}
+
+.tabela-pac th, td{
+    font-family: Roboto;
+    font-size: 23px;
+    font-style: normal;
+}
+
+.tabela-pac th{
+    font-weight: bold;
+}
+
+.tabela-pac td{
+    padding-left: 10px;
+}
+
+.box-lista-pac tbody{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 490px;
+}
+
+.tabela-pac{
+    padding-left: 20px;
+}
+
+.tabela-pac tr:nth-child(6){
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.tabela-pac textarea{
+    border: 4px solid #C2C2C2;
+    box-sizing: border-box;
+    border-radius: 10px;
+    width: 98%;
+    height: 217px;
+    resize: none;
+    text-align: justify;
+    padding: 10px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+}
+
+.acoes-pac{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20px;
+}
+
+.acoes-pac button{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    background-color: transparent;
+    color: #6D6D6D;
+}
+
+.acoes-pac div{
+    width: 350px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.box-lista2-pac{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.box-lista2-pac tbody{
+    flex-direction:row;
+    width: 100%;
+    padding-right: 20px;
+    display: flex;
+    justify-content: space-between;
+    height: 100%;
+}
