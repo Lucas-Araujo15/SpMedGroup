@@ -1,5 +1,22 @@
 import logo from '../../assets/img/logo_spmedgroup_v1 1.png'
 import '../../assets/styles/home.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import medicoSVG from '../../assets/img/search.svg'
+import exameSVG from '../../assets/img/science.svg'
+import prontoSocorroSVG from '../../assets/img/healing.svg'
+import imagemLab from '../../assets/img/imagem-laboratorio.jpg'
+import mapa from '../../assets/img/imagem-mapa.png'
+import elipse from '../../assets/img/elipse.png'
+import '../../assets/styles/global.css'
+
+
+//Ícones 
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faChevronCircleUp } from '@fortawesome/free-solid-svg-icons'
+import { faChevronCircleDown } from '@fortawesome/free-solid-svg-icons'
+
+import johnDoe from '../../assets/img/john-doe.jpg'
 
 function App() {
   return (
@@ -33,7 +50,7 @@ function App() {
               <a href="">
                 <div className="box-acoes">
                   <div className="box">
-                    <img src="../assets/img/science.svg" alt=""></img>
+                    <img src={exameSVG} alt=""></img>
                   </div>
                   <span>Exames</span>
                 </div>
@@ -41,7 +58,7 @@ function App() {
               <a href="">
                 <div className="box-acoes">
                   <div className="box1">
-                    <img src="../assets/img/search.svg" alt=""></img>
+                    <img src={medicoSVG} alt=""></img>
                   </div>
                   <span>Encontre um médico</span>
                 </div>
@@ -49,7 +66,7 @@ function App() {
               <a href="">
                 <div className="box-acoes">
                   <div className="box2">
-                    <img src="../assets/img/search.svg" alt=""></img>
+                    <img src={prontoSocorroSVG} alt=""></img>
                   </div>
                   <span>Pronto socorro</span>
                 </div>
@@ -76,12 +93,12 @@ function App() {
         </section>
         <section class="depoimentos">
           <div class="grid dpoConteudo">
-            <i class="fas fa-chevron-left"></i>
+            <FontAwesomeIcon className="fas" icon={faChevronLeft} />
             <div>
               <h2>depoimentos</h2>
               <div class="box-depoimento">
                 <div class="alinhamento">
-                  <img src="../assets/img/john-doe.jpg" alt="Foto de perfil de usuário"></img>
+                  <img src={johnDoe} alt="Foto de perfil de usuário"></img>
                   <p>John Doe</p>
                 </div>
                 <p>
@@ -91,9 +108,92 @@ function App() {
                 </p>
               </div>
             </div>
-            <i class="fas fa-chevron-right"></i>
+            <FontAwesomeIcon className="fas" icon={faChevronRight} />
           </div>
         </section>
+        <section class="duvidas">
+          <div class="grid box-perguntas">
+            <h2>dúvidas frequentes</h2>
+            <div class="pergunta">
+              <div>
+                <h3>
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                </h3>
+                <FontAwesomeIcon className="fas" icon={faChevronCircleUp} />
+              </div>
+              <div>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                  been
+                  the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                  galley
+                  of type and scrambled it to make a type specimen book. It has survived not only five
+                  centuries,
+                  but also the leap into electronic</p>
+              </div>
+            </div>
+            <div class="pergunta">
+              <div>
+                <h3>
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                </h3>
+                <FontAwesomeIcon className="fas" icon={faChevronCircleDown} />
+              </div>
+            </div>
+            <div class="pergunta">
+              <div>
+                <h3>
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                </h3>
+                <FontAwesomeIcon className="fas" icon={faChevronCircleDown} />
+              </div>
+            </div>
+            <div class="pergunta">
+              <div>
+                <h3>
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                </h3>
+                <FontAwesomeIcon className="fas" icon={faChevronCircleDown} />
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="extra">
+          <div class="grid">
+            <img src={imagemLab} alt="Imagem laboratório"></img>
+            <div>
+              <h2>Acesse conteúdos voltados a saúde:</h2>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                the
+                industry's standard dummy text ever since the 1500s.
+              </p>
+              <button>Acessar</button>
+            </div>
+          </div>
+        </section>
+        <section class="localizacao">
+          <div>
+            <img src={elipse} class="elipse" alt=""></img>
+            <h2>unidades</h2>
+            <div class="box-localizacao grid">
+              <img src={mapa} alt=""></img>
+              <div class="forms-localizacao">
+                <div>
+                  <h3>Digite seu CEP:</h3>
+                  <form action="">
+                    <input type="text" placeholder="CEP..." />
+                    <button>Procurar</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <footer>
+          <div class="grid rodape">
+            <span>sp medical group - 2021</span>
+          </div>
+        </footer>
       </main>
     </div>
   );
