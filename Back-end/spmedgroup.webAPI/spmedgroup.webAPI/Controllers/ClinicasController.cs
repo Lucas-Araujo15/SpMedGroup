@@ -8,7 +8,7 @@ using System;
 namespace spmedgroup.webAPI.Controllers
 {
     [Produces("application/json")]
-    [Authorize(Roles = "1")]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ClinicasController : ControllerBase
@@ -20,6 +20,7 @@ namespace spmedgroup.webAPI.Controllers
             clinicaRepository = new ClinicaRepository();
         }
 
+        [Authorize(Roles = "1")]
         [HttpPost]
         public IActionResult Cadastrar(Clinica clinica)
         {
@@ -57,6 +58,7 @@ namespace spmedgroup.webAPI.Controllers
             });
         }
 
+        [Authorize(Roles = "1")]
         [HttpPut("{id}")]
         public IActionResult Atualizar(int id, Clinica clinica)
         {
@@ -85,6 +87,7 @@ namespace spmedgroup.webAPI.Controllers
             }
         }
 
+        [Authorize(Roles = "1")]
         [HttpDelete("{id}")]
         public IActionResult Deletar(int id)
         {

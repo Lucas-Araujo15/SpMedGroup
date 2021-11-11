@@ -8,6 +8,7 @@ import imagemLab from '../../assets/img/imagem-laboratorio.jpg'
 import mapa from '../../assets/img/imagem-mapa.png'
 import elipse from '../../assets/img/elipse.png'
 import '../../assets/styles/global.css'
+import {Link} from 'react-router-dom';
 
 
 //Ícones 
@@ -32,13 +33,13 @@ function App() {
             <a href="">especialidades</a>
             <a href="">fale conosco</a>
             <a href="">convênios</a>
-            <a href="">login</a>
+            <Link to="/login">login</Link>
           </nav>
         </div>
       </header>
       <main>
         <section className="banner">
-          <div><h1>Onde sua saúde é prioridade!</h1>
+          <div><h1 className="h1-home">Onde sua saúde é prioridade!</h1>
             <p>Entre e tenha acesso às suas consultas de maneira rápida e prática.</p>
             <button>Entrar</button>
           </div>
@@ -162,7 +163,7 @@ function App() {
             <img src={imagemLab} alt="Imagem laboratório"></img>
             <div>
               <h2>Acesse conteúdos voltados a saúde:</h2>
-              <p>
+              <p className="p-extra">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
                 the
                 industry's standard dummy text ever since the 1500s.

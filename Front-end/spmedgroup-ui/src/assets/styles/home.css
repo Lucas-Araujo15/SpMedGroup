@@ -83,7 +83,7 @@ header{
     margin-top: 55px;
 }
 
-h1, .banner p{
+.h1-home, .banner p{
     font-family: Poppins;
     font-style: normal;
     color: #FFFFFF;
@@ -91,7 +91,7 @@ h1, .banner p{
     width: 945px;
 }
 
-h1{
+.h1-home{
     font-weight: 800;
     font-size: 90px;
     line-height: 135px;
@@ -423,7 +423,7 @@ h1{
     
 }
 
-.extra h2, p {
+.extra h2, .p-extra {
     font-style: normal;
     font-family: Poppins;
     color: #FFFFFF;

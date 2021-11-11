@@ -1,13 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Home from './pages/home/App.jsx'
+import Login from './pages/login/login.jsx'
+import adm from './pages/administrador/adm.jsx'
 import './index.css';
-import App from './pages/home/App.jsx';
 import reportWebVitals from './reportWebVitals';
+import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';;
+
+const routing = (
+  <Router>
+    <div>
+      <Switch>
+        <Route exact path="/" component={Home} /> {/* Home */}
+        <Route path="/login" component={Login} />
+        <Route path="/paineldecontrole" component={adm} />
+      </Switch>
+    </div>
+  </Router>
+)
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  routing,
   document.getElementById('root')
 );
 

@@ -17,10 +17,24 @@ namespace spmedgroup.webAPI
 {
     public class Startup
     {
+
+        readonly string CorsPolicy = "_CorsPolicy";
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: CorsPolicy,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:3000")
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod();
+                                  });
+            });
+
             services
                 .AddControllers()
                 .AddNewtonsoftJson(options =>
@@ -73,6 +87,8 @@ namespace spmedgroup.webAPI
             }
 
             app.UseRouting();
+
+            app.UseCors(CorsPolicy);
 
             app.UseAuthentication();
 
