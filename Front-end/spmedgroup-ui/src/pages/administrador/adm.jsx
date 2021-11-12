@@ -3,18 +3,23 @@ import axios from 'axios';
 import '../../assets/styles/adm.css'
 import logo from '../../assets/img/logo_spmedgroup_v1 1.png'
 import johnDoe from '../../assets/img/john-doe.jpg'
+import Select from 'react-select'
+
 
 
 
 export default function PainelControle() {
     const [listaConsultas, setListaConsultas] = useState([]);
+    const [listaSituacoes, setListaSituacoes] = useState([]);
     const [idPaciente, setPaciente] = useState(0);
     const [idMedico, setMedico] = useState(0);
-    const [idClinica, setClinica] = useState(0);
     const [data, setData] = useState(new Date());
     const [listaPacientes, setListaPacientes] = useState([]);
     const [listaMedicos, setListaMedicos] = useState([]);
     const [listaClinicas, setListaClinicas] = useState([]);
+    const [optionsPaciente, setOptionsPaciente] = useState([{ value: 0, label: '' }])
+
+
 
     function listarConsultas() {
         axios('http://localhost:5000/api/consultas', {
@@ -27,7 +32,8 @@ export default function PainelControle() {
                     setListaConsultas(resposta.data)
                 }
             })
-            .catch((erro) => console.log(erro));
+
+            .catch((erro) => console.log(erro))
     }
 
     function listarPacientes() {
@@ -39,9 +45,15 @@ export default function PainelControle() {
             .then((resposta) => {
                 if (resposta.status === 200) {
                     setListaPacientes(resposta.data)
+                    listaPacientes.map((paciente) => {
+                        setOptionsPaciente(optionsPaciente => [...optionsPaciente, { value: paciente.idPaciente, label: paciente.nomePaciente }]);
+                    })
                 }
             })
             .catch((erro) => console.log(erro));
+
+        console.log(listaConsultas)
+
     }
 
     function listarMedicos() {
@@ -53,6 +65,20 @@ export default function PainelControle() {
             .then((resposta) => {
                 if (resposta.status === 200) {
                     setListaMedicos(resposta.data)
+                }
+            })
+            .catch((erro) => console.log(erro));
+    }
+
+    function listarSituacoes() {
+        axios('http://localhost:5000/api/situacoes', {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+            }
+        })
+            .then((resposta) => {
+                if (resposta.status === 200) {
+                    setListaSituacoes(resposta.data)
                 }
             })
             .catch((erro) => console.log(erro));
@@ -91,24 +117,10 @@ export default function PainelControle() {
 
     }
 
-    function listarClinicas() {
-        axios('http://localhost:5000/api/clinicas', {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
-            }
-        })
-            .then((resposta) => {
-                if (resposta.status === 200) {
-                    setListaClinicas(resposta.data)
-                }
-            })
-            .catch((erro) => console.log(erro));
-    }
-
     useEffect(listarConsultas, [])
-    useEffect(listarMedicos, [])
-    useEffect(listarClinicas, [])
     useEffect(listarPacientes, [])
+    useEffect(listarMedicos, [])
+    useEffect(listarSituacoes, [])
 
     return (
         <div>
@@ -152,15 +164,36 @@ export default function PainelControle() {
                                 <div className="box-cadastro">
                                     <div>
                                         <label for="">Paciente:</label>
-                                        <input type="text" />
+
+                                        <select name="" id="">
+                                            {
+                                                listaPacientes.map((paciente) => {
+                                                    return (
+                                                        <option value={paciente.idPaciente}>{paciente.nomePaciente}</option>
+                                                    )
+                                                })
+                                            }
+
+                                        </select>
                                     </div>
                                     <div>
                                         <label for="">Médico:</label>
                                         <input type="text" />
                                     </div>
                                     <div>
-                                        <label for="">Clínica:</label>
-                                        <input type="text" />
+                                        <label for="">Situação:</label>
+                                        <select name="" id="">
+                                            <option value="0" selected disabled>Selecione uma situação</option>
+                                            {
+                                                listaSituacoes.map((situacao) => {
+
+                                                    return (
+                                                        <option value={situacao.idSituacao}>{situacao.situacaoDesc}</option>
+                                                    )
+                                                })
+                                            }
+                                        </select>
+
                                     </div>
                                     <div>
                                         <label for="">Data:</label>
@@ -193,7 +226,7 @@ export default function PainelControle() {
                     {
                         listaConsultas.map((consulta) => {
                             return (
-                                <div id={consulta.idConsulta} className="box-lista2 grid">
+                                <div key={consulta.idConsulta} id={consulta.idConsulta} className="box-lista2 grid">
                                     <div className="status">
                                         <div>
                                             <p>{consulta.idSituacaoNavigation.situacaoDesc}</p>

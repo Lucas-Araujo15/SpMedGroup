@@ -79,7 +79,7 @@
     justify-content: space-evenly;
 }
 
-.container-cadastro input{
+.container-cadastro input, select{
     border: 3px solid #8A8A8A;
     box-sizing: border-box;
     border-radius: 10px;

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\37140363854\\Desktop\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\spmedgroup.webAPI.csproj": {}
+    "C:\\Users\\Lucas Araujo\\OneDrive\\Área de Trabalho\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\spmedgroup.webAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\37140363854\\Desktop\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\spmedgroup.webAPI.csproj": {
+    "C:\\Users\\Lucas Araujo\\OneDrive\\Área de Trabalho\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\spmedgroup.webAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\37140363854\\Desktop\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\spmedgroup.webAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Lucas Araujo\\OneDrive\\Área de Trabalho\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\spmedgroup.webAPI.csproj",
         "projectName": "spmedgroup.webAPI",
-        "projectPath": "C:\\Users\\37140363854\\Desktop\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\spmedgroup.webAPI.csproj",
-        "packagesPath": "C:\\Users\\37140363854\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\37140363854\\Desktop\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\obj\\",
+        "projectPath": "C:\\Users\\Lucas Araujo\\OneDrive\\Área de Trabalho\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\spmedgroup.webAPI.csproj",
+        "packagesPath": "C:\\Users\\Lucas Araujo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Lucas Araujo\\OneDrive\\Área de Trabalho\\SpMedGroup\\Back-end\\spmedgroup.webAPI\\spmedgroup.webAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\37140363854\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Lucas Araujo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -89,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
