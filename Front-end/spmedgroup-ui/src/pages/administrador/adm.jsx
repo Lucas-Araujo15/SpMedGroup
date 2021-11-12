@@ -58,6 +58,39 @@ export default function PainelControle() {
             .catch((erro) => console.log(erro));
     }
 
+    function Maximizar(consulta) {
+        let divConsulta = document.getElementById(consulta.idConsulta)
+        divConsulta.classList.remove('box-lista2')
+        divConsulta.classList.add('box-lista')
+
+        for (let i = 5; i <= 10; i++) {
+            let infoTabela = document.getElementById('input' + i + consulta.idConsulta)
+            infoTabela.style.setProperty('display', 'flex')
+        }
+
+        let btnMin = document.getElementById('min' + consulta.idConsulta)
+        let btnMax = document.getElementById('max' + consulta.idConsulta)
+        btnMax.style.setProperty('display', 'none')
+        btnMin.style.setProperty('display', 'block')
+    }
+
+    function Minimizar(consulta) {
+        let divConsulta = document.getElementById(consulta.idConsulta)
+        divConsulta.classList.remove('box-lista')
+        divConsulta.classList.add('box-lista2')
+
+        for (let i = 5; i <= 10; i++) {
+            let infoTabela = document.getElementById('input' + i + consulta.idConsulta)
+            infoTabela.style.setProperty('display', 'none')
+        }
+
+        let btnMin = document.getElementById('min' + consulta.idConsulta)
+        let btnMax = document.getElementById('max' + consulta.idConsulta)
+        btnMin.style.setProperty('display', 'none')
+        btnMax.style.setProperty('display', 'block')
+
+    }
+
     function listarClinicas() {
         axios('http://localhost:5000/api/clinicas', {
             headers: {
@@ -157,74 +190,10 @@ export default function PainelControle() {
                     </div>
                 </section>
                 <section className="lista">
-                    <div className="box-lista grid">
-                        <div className="status">
-                            <div>
-                                <p>Agendada</p>
-                            </div>
-                            <div>
-                                <p>1</p>
-                            </div>
-                        </div>
-                        <table className="tabela">
-                            <tbody>
-                                <tr>
-                                    <th>Paciente:</th>
-                                    <td>Jane Doe</td>
-                                </tr>
-                                <tr>
-                                    <th>Médico:</th>
-                                    <td>John Doe</td>
-                                </tr>
-                                <tr>
-                                    <th>RG do paciente:</th>
-                                    <td>1234567-x</td>
-                                </tr>
-                                <tr>
-                                    <th>Telefone do paciente:</th>
-                                    <td>1234-5678</td>
-                                </tr>
-                                <tr>
-                                    <th>Endereço do paciente:</th>
-                                    <td>Avenida Barão de limeira, N 123</td>
-                                </tr>
-                                <tr>
-                                    <th>Data:</th>
-                                    <td>01/01/0001</td>
-                                </tr>
-                                <tr>
-                                    <th>Especialidade do médico:</th>
-                                    <td>Ortopedia</td>
-                                </tr>
-                                <tr>
-                                    <th>CRM:</th>
-                                    <td>12345</td>
-                                </tr>
-                                <tr>
-                                    <th>Clínica:</th>
-                                    <td>Clínica Possarle</td>
-                                </tr>
-                                <tr>
-                                    <th>Descrição da consulta:</th>
-                                    <td><textarea disabled name="" id="" cols="30" rows="10">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                                    </textarea></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div className="action">
-                            <div>
-                                <button>Atualizar</button>
-                                <button>Deletar</button>
-                                <button>Minimizar</button>
-                            </div>
-                        </div>
-                    </div>
                     {
                         listaConsultas.map((consulta) => {
-                            console.log(listaConsultas)
                             return (
-
-                                <div className="box-lista2 grid">
+                                <div id={consulta.idConsulta} className="box-lista2 grid">
                                     <div className="status">
                                         <div>
                                             <p>{consulta.idSituacaoNavigation.situacaoDesc}</p>
@@ -235,21 +204,45 @@ export default function PainelControle() {
                                     </div>
                                     <table className="tabela">
                                         <tbody>
-                                            <tr>
+                                            <tr id={"input1" + consulta.idConsulta}>
                                                 <th>Paciente:</th>
-                                                <td>{consulta.idPacienteNavigation.nomePaciente}</td>
+                                                <td><input readOnly type="text" className="inputUpdate" name="paciente" value={consulta.idPacienteNavigation.nomePaciente} /></td>
                                             </tr>
-                                            <tr>
+                                            <tr id={"input2" + consulta.idConsulta}>
                                                 <th>Médico:</th>
-                                                <td>{consulta.idMedicoNavigation.nomeMedico}</td>
+                                                <td><input readOnly type="text" className="inputUpdate" name="medico" value={consulta.idMedicoNavigation.nomeMedico} /></td>
                                             </tr>
-                                            <tr>
+                                            <tr id={"input3" + consulta.idConsulta}>
                                                 <th>RG do paciente:</th>
-                                                <td>{consulta.idPacienteNavigation.rgPaciente}</td>
+                                                <td><input readOnly type="text" className="inputUpdate" name="rgPaciente" value={consulta.idPacienteNavigation.rgPaciente} /></td>
                                             </tr>
-                                            <tr>
+                                            <tr id={"input4" + consulta.idConsulta}>
                                                 <th>Telefone do paciente:</th>
-                                                <td>{consulta.idPacienteNavigation.telPaciente}</td>
+                                                <td><input readOnly type="text" className="inputUpdate" name="telPaciente" value={consulta.idPacienteNavigation.telPaciente} /></td>
+                                            </tr>
+                                            <tr style={{ display: 'none' }} id={"input5" + consulta.idConsulta}>
+                                                <th>Endereço do paciente:</th>
+                                                <td><input readOnly type="text" className="inputUpdate" name="endPaciente" value={consulta.idPacienteNavigation.endPaciente} /></td>
+                                            </tr>
+                                            <tr style={{ display: 'none' }} id={"input6" + consulta.idConsulta}>
+                                                <th>Data:</th>
+                                                <td><input readOnly type="date" className="inputUpdate" name="data" value={consulta.dataConsulta} /></td>
+                                            </tr>
+                                            <tr style={{ display: 'none' }} id={"input7" + consulta.idConsulta}>
+                                                <th>Especialidade do médico:</th>
+                                                <td><input readOnly type="text" className="inputUpdate" name="especialidade" value={consulta.idMedicoNavigation.idEspecialidadeNavigation.nomeEspecialidade} /></td>
+                                            </tr>
+                                            <tr style={{ display: 'none' }} id={"input8" + consulta.idConsulta}>
+                                                <th>CRM:</th>
+                                                <td><input readOnly type="text" className="inputUpdate" name="crm" value={consulta.idMedicoNavigation.crm} /></td>
+                                            </tr>
+                                            <tr style={{ display: 'none' }} id={"input9" + consulta.idConsulta}>
+                                                <th>Clínica:</th>
+                                                <td><input readOnly type="text" className="inputUpdate" name="clinica" value={consulta.idMedicoNavigation.idClinicaNavigation.nomeFantasia} /></td>
+                                            </tr>
+                                            <tr style={{ display: 'none' }} id={"input10" + consulta.idConsulta}>
+                                                <th>Descrição da consulta:</th>
+                                                <td><textarea disabled name="" className="" cols="30" rows="10" value={consulta.consultaDesc}></textarea></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -257,51 +250,14 @@ export default function PainelControle() {
                                         <div>
                                             <button>Atualizar</button>
                                             <button>Deletar</button>
-                                            <button>Maximizar</button>
+                                            <button onClick={() => Maximizar(consulta)} id={'max' + consulta.idConsulta}>Maximizar</button>
+                                            <button onClick={() => Minimizar(consulta)} style={{ display: 'none' }} id={'min' + consulta.idConsulta}>Minimizar</button>
                                         </div>
                                     </div>
                                 </div>
                             )
                         })
                     }
-
-                    <div className="box-lista2 grid">
-                        <div className="status">
-                            <div>
-                                <p>Agendada</p>
-                            </div>
-                            <div>
-                                <p>1</p>
-                            </div>
-                        </div>
-                        <table className="tabela">
-                            <tbody>
-                                <tr>
-                                    <th>Paciente:</th>
-                                    <td>Jane Doe</td>
-                                </tr>
-                                <tr>
-                                    <th>Médico:</th>
-                                    <td>John Doe</td>
-                                </tr>
-                                <tr>
-                                    <th>RG do paciente:</th>
-                                    <td>1234567-x</td>
-                                </tr>
-                                <tr>
-                                    <th>Telefone do paciente:</th>
-                                    <td>1234-5678</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div className="action">
-                            <div>
-                                <button>Atualizar</button>
-                                <button>Deletar</button>
-                                <button>Maximizar</button>
-                            </div>
-                        </div>
-                    </div>
                 </section>
                 <footer>
                     <div className="grid rodape">

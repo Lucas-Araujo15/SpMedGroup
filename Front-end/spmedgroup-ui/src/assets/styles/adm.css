@@ -242,22 +242,13 @@
     color: #FFFFFF;
 }
 
-.box-lista{
-    background: #FFFFFF;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    height: 800px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
+
 
 .lista{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 1365px;
-    max-height: 2400px;
     align-items: center;
 }
 
@@ -304,7 +295,14 @@
     display: flex;
 }
 
-.tabela th, td{
+.inputUpdate{
+    font-family: Roboto;
+    font-size: 23px;
+    font-style: normal;
+    width: 125px;
+}
+
+.tabela th{
     font-family: Roboto;
     font-size: 23px;
     font-style: normal;
@@ -375,7 +373,7 @@
     color: #FF0000;
 }
 
-.action button:nth-child(3){
+.action button:nth-child(3), button:nth-child(4){
     color: #6D6D6D;
 }
 
@@ -403,10 +401,25 @@ h1{
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     height: 200px;
-    margin-top: 52px;
+    margin: 26px 0px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: width 10s, height 0.3s;
+    
+}
+
+.box-lista{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    height: 800px;
+    margin: 26px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: width 10s, height 0.5s;
+
 }
 
 .box-lista2 tbody{
@@ -416,6 +429,7 @@ h1{
     display: flex;
     justify-content: space-between;
     height: 100%;
+    transition: width 10s, height 0.5s;
 }
 
 
