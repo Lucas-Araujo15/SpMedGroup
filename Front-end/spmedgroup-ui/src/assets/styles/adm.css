@@ -79,7 +79,7 @@
     justify-content: space-evenly;
 }
 
-.container-cadastro input, select{
+.container-cadastro input, .container-cadastro select{
     border: 3px solid #8A8A8A;
     box-sizing: border-box;
     border-radius: 10px;
@@ -293,6 +293,7 @@
 
 .tabela tr{
     display: flex;
+    align-items: center;
 }
 
 .inputUpdate{
@@ -302,7 +303,7 @@
     width: 125px;
 }
 
-.tabela th{
+.tabela th, td{
     font-family: Roboto;
     font-size: 23px;
     font-style: normal;
@@ -328,9 +329,9 @@
 }
 
 .tabela tr:nth-child(10){
-    display: flex;
     flex-direction: column;
     padding: 0;
+    align-items: inherit;
 }
 
 .tabela textarea{
@@ -377,6 +378,24 @@
     color: #6D6D6D;
 }
 
+.action button:nth-child(5){
+    background-color: #bb2424;
+}
+
+.action button:nth-child(5), button:nth-child(6){
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    color:#FFFFFF
+}
+
+.action button:nth-child(6){
+    background-color: #4EC596;
+}
+
+
+
+
 .action div{
     width: 350px;
     display: flex;
@@ -419,7 +438,6 @@ h1{
     flex-direction: column;
     justify-content: space-between;
     transition: width 10s, height 0.5s;
-
 }
 
 .box-lista2 tbody{
@@ -431,5 +449,32 @@ h1{
     height: 100%;
     transition: width 10s, height 0.5s;
 }
+
+
+.atualizar select{
+    display: block;
+    font-family: Roboto;
+    font-size: 23px;
+    font-style: normal;
+    background: #36936E;
+    border-radius: 7px;
+    color: #FFFFFF;
+    height: 45px;
+    outline: none;
+}
+
+.atualizar p{
+    display: none;
+}
+
+.fecharAtualizar select{
+    display: none;
+}
+
+.fecharAtualizar p{
+    display: block;
+}
+
+
 
 

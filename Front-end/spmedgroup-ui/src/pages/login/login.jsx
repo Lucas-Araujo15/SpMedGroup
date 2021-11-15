@@ -57,14 +57,16 @@ export default class Login extends Component {
                         this.props.history.push('/')
                     }
                 }
-                this.setState({
-                    isLoading: false
-                })
+
             })
 
             .catch(
                 erro => console.log(erro)
             )
+            
+        this.setState({
+            isLoading: false
+        })
 
         this.limparCampos()
 

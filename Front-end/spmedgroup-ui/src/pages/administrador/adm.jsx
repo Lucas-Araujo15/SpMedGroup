@@ -5,20 +5,128 @@ import logo from '../../assets/img/logo_spmedgroup_v1 1.png'
 import johnDoe from '../../assets/img/john-doe.jpg'
 import Select from 'react-select'
 
-
-
-
 export default function PainelControle() {
     const [listaConsultas, setListaConsultas] = useState([]);
     const [listaSituacoes, setListaSituacoes] = useState([]);
     const [idPaciente, setPaciente] = useState(0);
     const [idMedico, setMedico] = useState(0);
+    const [idSituacao, setSituacao] = useState(0);
     const [data, setData] = useState(new Date());
     const [listaPacientes, setListaPacientes] = useState([]);
     const [listaMedicos, setListaMedicos] = useState([]);
-    const [listaClinicas, setListaClinicas] = useState([]);
-    const [optionsPaciente, setOptionsPaciente] = useState([{ value: 0, label: '' }])
 
+    const medicoEscolhido = (medico) => {
+        setMedico(medico.target.value)
+    }
+
+    const pacienteEscolhido = (paciente) => {
+        setPaciente(paciente.target.value)
+    }
+
+    const situacaoEscolhida = (situacao) => {
+        setSituacao(situacao.target.value)
+    }
+
+    const dataEscolhida = (data) => {
+        setData(data.target.value)
+    }
+
+    const limparStates = () => {
+        setMedico(0)
+        setPaciente(0)
+        setSituacao(0)
+        setData(new Date())
+    }
+
+    function atualizar(consulta) {
+        let dadosAtualizados = {
+            idMedico: idMedico,
+            idPaciente: idPaciente,
+            idSituacao: idSituacao,
+            dataConsulta: data
+        }
+
+        axios.put('http://localhost:5000/api/consultas/' + consulta.idConsulta, dadosAtualizados, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+            },
+        })
+            .catch((erro) => {
+                console.log(erro)
+            })
+
+            .then(listarConsultas)
+
+            .then(limparStates)
+
+            .then(Minimizar(consulta))
+    }
+
+    function manipular(consulta) {
+        Maximizar(consulta)
+        var consultaUpdate = document.getElementById(consulta.idConsulta)
+        let btnMin = document.getElementById('min' + consulta.idConsulta)
+        let btnMax = document.getElementById('max' + consulta.idConsulta)
+        let btnAtualizar = document.getElementById('atualizar' + consulta.idConsulta)
+        let btnDeletar = document.getElementById('deletar' + consulta.idConsulta)
+        let btnCancelar = document.getElementById('cancelar' + consulta.idConsulta)
+        let btnConcluir = document.getElementById('concluir' + consulta.idConsulta)
+
+        btnMin.style.setProperty('display', 'none')
+        btnMax.style.setProperty('display', 'none')
+        btnAtualizar.style.setProperty('display', 'none')
+        btnDeletar.style.setProperty('display', 'none')
+
+        setMedico(consulta.idMedico)
+        setPaciente(consulta.idPaciente)
+        setSituacao(consulta.idSituacao)
+        setData(consulta.dataConsulta)
+
+        btnCancelar.style.setProperty('display', 'block')
+        btnConcluir.style.setProperty('display', 'block')
+
+        consultaUpdate.classList.remove('fecharAtualizar')
+        consultaUpdate.classList.add('atualizar')
+    }
+
+    function deletar(id) {
+        axios.delete('http://localhost:5000/api/consultas/' + id, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+            },
+        })
+            .catch((erro) => {
+                console.log(erro)
+            })
+
+            .then(listarConsultas)
+
+    }
+
+    function cadastrar(event) {
+
+        event.preventDefault();
+
+        let consulta = {
+            idMedico: idMedico,
+            idPaciente: idPaciente,
+            idSituacao: idSituacao,
+            dataConsulta: data
+        }
+
+        axios.post('http://localhost:5000/api/consultas', consulta, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+            },
+        })
+            .catch((erro) => {
+                console.log(erro)
+            })
+
+            .then(listarConsultas)
+
+            .then(limparStates)
+    }
 
 
     function listarConsultas() {
@@ -45,9 +153,6 @@ export default function PainelControle() {
             .then((resposta) => {
                 if (resposta.status === 200) {
                     setListaPacientes(resposta.data)
-                    listaPacientes.map((paciente) => {
-                        setOptionsPaciente(optionsPaciente => [...optionsPaciente, { value: paciente.idPaciente, label: paciente.nomePaciente }]);
-                    })
                 }
             })
             .catch((erro) => console.log(erro));
@@ -103,7 +208,10 @@ export default function PainelControle() {
     function Minimizar(consulta) {
         let divConsulta = document.getElementById(consulta.idConsulta)
         divConsulta.classList.remove('box-lista')
+        divConsulta.classList.remove('atualizar')
+        divConsulta.classList.add('fecharAtualizar')
         divConsulta.classList.add('box-lista2')
+        limparStates()
 
         for (let i = 5; i <= 10; i++) {
             let infoTabela = document.getElementById('input' + i + consulta.idConsulta)
@@ -114,6 +222,16 @@ export default function PainelControle() {
         let btnMax = document.getElementById('max' + consulta.idConsulta)
         btnMin.style.setProperty('display', 'none')
         btnMax.style.setProperty('display', 'block')
+
+        let btnAtualizar = document.getElementById('atualizar' + consulta.idConsulta)
+        let btnDeletar = document.getElementById('deletar' + consulta.idConsulta)
+        let btnCancelar = document.getElementById('cancelar' + consulta.idConsulta)
+        let btnConcluir = document.getElementById('concluir' + consulta.idConsulta)
+
+        btnAtualizar.style.setProperty('display', 'block')
+        btnDeletar.style.setProperty('display', 'block')
+        btnCancelar.style.setProperty('display', 'none')
+        btnConcluir.style.setProperty('display', 'none')
 
     }
 
@@ -160,12 +278,13 @@ export default function PainelControle() {
                             </button>
                         </div>
                         <div className="box-form">
-                            <form action="">
+                            <form onSubmit={c => cadastrar(c)}>
                                 <div className="box-cadastro">
                                     <div>
                                         <label for="">Paciente:</label>
 
-                                        <select name="" id="">
+                                        <select onChange={p => pacienteEscolhido(p)} name="" id="">
+                                            <option value="0" selected disabled>Selecione um paciente</option>
                                             {
                                                 listaPacientes.map((paciente) => {
                                                     return (
@@ -178,11 +297,21 @@ export default function PainelControle() {
                                     </div>
                                     <div>
                                         <label for="">Médico:</label>
-                                        <input type="text" />
+                                        <select onChange={m => medicoEscolhido(m)} value={idMedico} name="" id="">
+                                            <option value="0" selected disabled>Selecione um médico</option>
+                                            {
+                                                listaMedicos.map((medico) => {
+                                                    return (
+                                                        <option value={medico.idMedico}>{medico.nomeMedico}</option>
+                                                    )
+                                                })
+                                            }
+
+                                        </select>
                                     </div>
                                     <div>
                                         <label for="">Situação:</label>
-                                        <select name="" id="">
+                                        <select onChange={s => situacaoEscolhida(s)} name="" id="">
                                             <option value="0" selected disabled>Selecione uma situação</option>
                                             {
                                                 listaSituacoes.map((situacao) => {
@@ -197,13 +326,13 @@ export default function PainelControle() {
                                     </div>
                                     <div>
                                         <label for="">Data:</label>
-                                        <input type="date" />
+                                        <input type="date" onChange={d => dataEscolhida(d)} />
                                     </div>
                                 </div>
                                 <div className="buttons-cadastro">
                                     <div>
                                         <button>Cancelar</button>
-                                        <button>Concluir</button>
+                                        <button type='submit'>Concluir</button>
                                     </div>
                                 </div>
                             </form>
@@ -226,10 +355,23 @@ export default function PainelControle() {
                     {
                         listaConsultas.map((consulta) => {
                             return (
-                                <div key={consulta.idConsulta} id={consulta.idConsulta} className="box-lista2 grid">
+                                <div key={consulta.idConsulta} id={consulta.idConsulta} className="box-lista2 grid fecharAtualizar">
                                     <div className="status">
                                         <div>
                                             <p>{consulta.idSituacaoNavigation.situacaoDesc}</p>
+
+                                            <select onChange={s => situacaoEscolhida(s)} name="" id="">
+                                                <option value={consulta.idSituacao} selected disabled>{consulta.idSituacaoNavigation.situacaoDesc}</option>
+                                                {
+                                                    listaSituacoes.map((situacao) => {
+
+                                                        return (
+                                                            <option value={situacao.idSituacao}>{situacao.situacaoDesc}</option>
+                                                        )
+                                                    })
+                                                }
+                                            </select>
+
                                         </div>
                                         <div>
                                             <p>{consulta.idConsulta}</p>
@@ -239,39 +381,66 @@ export default function PainelControle() {
                                         <tbody>
                                             <tr id={"input1" + consulta.idConsulta}>
                                                 <th>Paciente:</th>
-                                                <td><input readOnly type="text" className="inputUpdate" name="paciente" value={consulta.idPacienteNavigation.nomePaciente} /></td>
+                                                <td><p>{consulta.idPacienteNavigation.nomePaciente}</p>
+
+                                                    <select onChange={p => pacienteEscolhido(p)} name="" id="">
+                                                        <option value={consulta.idPaciente} selected disabled>{consulta.idPacienteNavigation.nomePaciente}</option>
+                                                        {
+                                                            listaPacientes.map((paciente) => {
+                                                                return (
+                                                                    <option value={paciente.idPaciente}>{paciente.nomePaciente}</option>
+                                                                )
+                                                            })
+                                                        }
+                                                    </select>
+
+                                                </td>
                                             </tr>
                                             <tr id={"input2" + consulta.idConsulta}>
                                                 <th>Médico:</th>
-                                                <td><input readOnly type="text" className="inputUpdate" name="medico" value={consulta.idMedicoNavigation.nomeMedico} /></td>
+                                                <td><p>{consulta.idMedicoNavigation.nomeMedico}</p>
+
+                                                    <select onChange={m => medicoEscolhido(m)} name="" id="">
+                                                        <option value={consulta.idMedico} selected disabled>{consulta.idMedicoNavigation.nomeMedico}</option>
+                                                        {
+                                                            listaMedicos.map((medico) => {
+                                                                return (
+                                                                    <option value={medico.idMedico}>{medico.nomeMedico}</option>
+                                                                )
+                                                            })
+                                                        }
+
+                                                    </select>
+
+                                                </td>
                                             </tr>
                                             <tr id={"input3" + consulta.idConsulta}>
                                                 <th>RG do paciente:</th>
-                                                <td><input readOnly type="text" className="inputUpdate" name="rgPaciente" value={consulta.idPacienteNavigation.rgPaciente} /></td>
+                                                <td>{consulta.idPacienteNavigation.rgPaciente}</td>
                                             </tr>
                                             <tr id={"input4" + consulta.idConsulta}>
                                                 <th>Telefone do paciente:</th>
-                                                <td><input readOnly type="text" className="inputUpdate" name="telPaciente" value={consulta.idPacienteNavigation.telPaciente} /></td>
+                                                <td>{consulta.idPacienteNavigation.telPaciente}</td>
                                             </tr>
                                             <tr style={{ display: 'none' }} id={"input5" + consulta.idConsulta}>
                                                 <th>Endereço do paciente:</th>
-                                                <td><input readOnly type="text" className="inputUpdate" name="endPaciente" value={consulta.idPacienteNavigation.endPaciente} /></td>
+                                                <td>{consulta.idPacienteNavigation.endPaciente}</td>
                                             </tr>
                                             <tr style={{ display: 'none' }} id={"input6" + consulta.idConsulta}>
                                                 <th>Data:</th>
-                                                <td><input readOnly type="date" className="inputUpdate" name="data" value={consulta.dataConsulta} /></td>
+                                                <td><input readOnly type="date" name="data" value={consulta.dataConsulta} /></td>
                                             </tr>
                                             <tr style={{ display: 'none' }} id={"input7" + consulta.idConsulta}>
                                                 <th>Especialidade do médico:</th>
-                                                <td><input readOnly type="text" className="inputUpdate" name="especialidade" value={consulta.idMedicoNavigation.idEspecialidadeNavigation.nomeEspecialidade} /></td>
+                                                <td>{consulta.idMedicoNavigation.idEspecialidadeNavigation.nomeEspecialidade}</td>
                                             </tr>
                                             <tr style={{ display: 'none' }} id={"input8" + consulta.idConsulta}>
                                                 <th>CRM:</th>
-                                                <td><input readOnly type="text" className="inputUpdate" name="crm" value={consulta.idMedicoNavigation.crm} /></td>
+                                                <td>{consulta.idMedicoNavigation.crm}</td>
                                             </tr>
                                             <tr style={{ display: 'none' }} id={"input9" + consulta.idConsulta}>
                                                 <th>Clínica:</th>
-                                                <td><input readOnly type="text" className="inputUpdate" name="clinica" value={consulta.idMedicoNavigation.idClinicaNavigation.nomeFantasia} /></td>
+                                                <td>{consulta.idMedicoNavigation.idClinicaNavigation.nomeFantasia}</td>
                                             </tr>
                                             <tr style={{ display: 'none' }} id={"input10" + consulta.idConsulta}>
                                                 <th>Descrição da consulta:</th>
@@ -281,10 +450,12 @@ export default function PainelControle() {
                                     </table>
                                     <div className="action">
                                         <div>
-                                            <button>Atualizar</button>
-                                            <button>Deletar</button>
+                                            <button onClick={() => manipular(consulta)} id={'atualizar' + consulta.idConsulta}>Atualizar</button>
+                                            <button onClick={() => deletar(consulta.idConsulta)} id={'deletar' + consulta.idConsulta}>Deletar</button>
                                             <button onClick={() => Maximizar(consulta)} id={'max' + consulta.idConsulta}>Maximizar</button>
                                             <button onClick={() => Minimizar(consulta)} style={{ display: 'none' }} id={'min' + consulta.idConsulta}>Minimizar</button>
+                                            <button onClick={() => Minimizar(consulta)} style={{ display: 'none' }} id={'cancelar' + consulta.idConsulta}>Cancelar</button>
+                                            <button onClick={() => atualizar(consulta)} style={{ display: 'none' }} id={'concluir' + consulta.idConsulta}>Concluir</button>
                                         </div>
                                     </div>
                                 </div>
