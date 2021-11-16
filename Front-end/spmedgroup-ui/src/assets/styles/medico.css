@@ -1,11 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Rock+Salt&display=swap');
 
 
-.box-pesquisa button{
+.box-pesquisa-med button{
     background: #61C8FF;
     border-radius: 30px;
     height: 51px;
     width: 180px;
+}
+
+.box-pesquisa-med{
+    display: flex;
+    width: 960px;
+    justify-content: space-between;
+}
+
+.box-pesquisa-med button{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 28px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.box-pesquisa-med div{
+    width: 760px;
+    background: #FFFFFF;
+    border: 3px solid #B4BFBB;
+    box-sizing: border-box;
+    border-radius: 30px;
+}
+
+.box-pesquisa-med input{
+    width: 90%;
+    height: 100%;
+    border-radius: 30px;
+    text-decoration: none;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    padding: 0 0 0 10px;
+}
+
+.box-pesquisa-med input:focus{
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
 }
 
 .banner-med{
@@ -128,8 +169,15 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 1365px;
+    min-height: 1365px;
     align-items: center;
+}
+
+.status-med div:nth-child(1){
+    background: #3580a8;
+    border-radius: 0px 0px 0px 10px;
+    height: 100%;
+    width: 197px;
 }
 
 .status-med div{
@@ -150,12 +198,13 @@
     height: 50px;
 }
 
-.status-med div{
-    border-radius: 0px 10px;
+.status-med div:nth-child(2){
+    border-radius: 0px 10px 0px 0px;
     background: #61C8FF;
     width: 51px;
     height: 100%;
 }
+
 .tabela-med{
     width: 100%;
 }
@@ -193,7 +242,7 @@
     padding-left: 20px;
 }
 
-.tabela-med tr:nth-child(7){
+.tabela-med tr:nth-child(6){
     display: flex;
     flex-direction: column;
     padding: 0;
@@ -229,13 +278,21 @@
     font-weight: normal;
     font-size: 20px;
     background-color: transparent;
+    
+}
+
+.acoes-med button:nth-child(3){
+    color: #284EAE;
+}
+
+.acoes-med button:nth-child(5), button:nth-child(6){
     color: #6D6D6D;
 }
 
 .acoes-med div{
     width: 350px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 h1{
@@ -252,9 +309,24 @@ h1{
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     height: 200px;
+    margin: 26px 0px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: width 10s, height 0.3s;
+    
+}
+
+.box-lista-med{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    height: 800px;
+    margin: 26px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: width 10s, height 0.5s;
 }
 
 .box-lista2-med tbody{
@@ -264,4 +336,5 @@ h1{
     display: flex;
     justify-content: space-between;
     height: 100%;
+    transition: width 10s, height 0.5s;
 }

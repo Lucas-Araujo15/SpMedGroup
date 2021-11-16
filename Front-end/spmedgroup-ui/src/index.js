@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Home from './pages/home/App.jsx'
+import Medico from './pages/medico/medico.jsx'
 import Login from './pages/login/login.jsx'
 import adm from './pages/administrador/adm.jsx'
 import './index.css';
@@ -13,6 +14,7 @@ const routing = (
       <Switch>
         <Route exact path="/" component={Home} /> {/* Home */}
         <Route path="/login" component={Login} />
+        <Route path="/agendamentos" component={Medico} />
         <Route path="/paineldecontrole" component={adm} />
       </Switch>
     </div>

@@ -7,6 +7,38 @@
     width: 180px;
 }
 
+.box-pesquisa{
+    display: flex;
+    width: 960px;
+    justify-content: space-between;
+}
+
+.box-pesquisa div{
+    width: 760px;
+    background: #FFFFFF;
+    border: 3px solid #B4BFBB;
+    box-sizing: border-box;
+    border-radius: 30px;
+}
+
+.box-pesquisa input{
+    width: 90%;
+    height: 100%;
+    border-radius: 30px;
+    text-decoration: none;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    padding: 0 0 0 10px;
+}
+
+.box-pesquisa input:focus{
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+}
+
 .banner-adm{
     height: 400px;
     width: 100%;
@@ -283,6 +315,7 @@
     width: 51px;
     height: 100%;
 }
+
 .tabela{
     width: 100%;
 }
