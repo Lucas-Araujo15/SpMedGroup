@@ -6,8 +6,36 @@ import johnDoe from '../../assets/img/john-doe.jpg'
 
 export default function Agendamentos() {
     const [listaAgendamentos, setListaAgendamentos] = useState([])
-    const [descConsulta, setDescConsulta] = useState([])
+    const [descConsulta, setDescConsulta] = useState('')
     const [addDescricao, setAddDescricao] = useState(false)
+
+    const descricao = (agendamento) => {
+        setDescConsulta(agendamento.target.value)
+    }
+
+    function Atualizar(agendamento) {
+        let descAtualizada = {
+            consultaDesc: descConsulta
+        }
+
+        axios.patch('http://localhost:5000/api/consultas/descricao/' + agendamento.idConsulta, descAtualizada, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+            },
+        })
+
+            .catch((erro) => {
+                console.log(erro)
+            })
+
+            .then(ListarAgendamentos)
+            
+            setDescConsulta('')
+
+            Minimizar(agendamento)
+
+
+    }
 
     function ListarAgendamentos() {
         axios('http://localhost:5000/api/consultas/minhas', {
@@ -40,17 +68,39 @@ export default function Agendamentos() {
         btnMin.style.setProperty('display', 'block')
     }
 
-    function Manipular(agendamento){
+    function Manipular(agendamento) {
         Maximizar(agendamento)
-        setAddDescricao(true)
+        document.getElementById('text' + agendamento.idConsulta).readOnly = false
+        let btnMin = document.getElementById('min' + agendamento.idConsulta)
+        let btnMax = document.getElementById('max' + agendamento.idConsulta)
+        let btnManipular = document.getElementById('desc' + agendamento.idConsulta)
+        let btnCancelar = document.getElementById('cancelar' + agendamento.idConsulta)
+        let btnConcluir = document.getElementById('concluir' + agendamento.idConsulta)
+        setDescConsulta(agendamento.consultaDesc)
+
+        btnCancelar.style.setProperty('display', 'block')
+        btnConcluir.style.setProperty('display', 'block')
+        btnMax.style.setProperty('display', 'none')
+        btnManipular.style.setProperty('display', 'none')
+        btnMin.style.setProperty('display', 'none')
     }
 
     function Minimizar(agendamento) {
-        
+
         setAddDescricao(false)
         let divAgendamento = document.getElementById(agendamento.idConsulta)
+        let btnManipular = document.getElementById('desc' + agendamento.idConsulta)
+        let btnCancelar = document.getElementById('cancelar' + agendamento.idConsulta)
+        let btnConcluir = document.getElementById('concluir' + agendamento.idConsulta)
+
+        btnCancelar.style.setProperty('display', 'none')
+        btnConcluir.style.setProperty('display', 'none') 
+        btnManipular.style.setProperty('display', 'block')
+
         divAgendamento.classList.add('box-lista2-med')
         divAgendamento.classList.remove('box-lista-med')
+        document.getElementById('text' + agendamento.idConsulta).readOnly = true
+
 
         for (let i = 4; i <= 6; i++) {
             let infoTabela = document.getElementById('tr' + i + agendamento.idConsulta)
@@ -143,15 +193,15 @@ export default function Agendamentos() {
                                             </tr>
                                             <tr id={'tr6' + agendamento.idConsulta} style={{ display: 'none' }}>
                                                 <th>Descrição da consulta:</th>
-                                                <td><textarea id={'text' + agendamento.idConsulta} readOnly={!addDescricao} name="" id="" cols="30" rows="10" value={agendamento.consultaDesc}>
+                                                <td><textarea id={'text' + agendamento.idConsulta} readOnly={true} name="" cols="30" rows="10" onChange={t => descricao(t)}>{agendamento.consultaDesc}
                                                 </textarea></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <div class="acoes-med">
                                         <div>
-                                            <button id={'cancelar' + agendamento.idConsulta} style={{ display: 'none' }}>Cancelar</button>
-                                            <button id={'concluir' + agendamento.idConsulta} style={{ display: 'none' }}>Concluir</button>
+                                            <button onClick={() => Minimizar(agendamento)} id={'cancelar' + agendamento.idConsulta} style={{ display: 'none' }}>Cancelar</button>
+                                            <button onClick={() => Atualizar(agendamento)} id={'concluir' + agendamento.idConsulta} style={{ display: 'none' }}>Concluir</button>
                                             <button onClick={() => Manipular(agendamento)} id={'desc' + agendamento.idConsulta}>Adicionar descrição</button>
                                             <button onClick={() => Minimizar(agendamento)} id={'min' + agendamento.idConsulta} style={{ display: 'none' }}>Minimizar</button>
                                             <button onClick={() => Maximizar(agendamento)} id={'max' + agendamento.idConsulta}>Maximizar</button>

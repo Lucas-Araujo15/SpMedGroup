@@ -44,7 +44,12 @@ namespace spmedgroup.webAPI.Repositories
 
             if (consulta != null)
             {
-                consulta.ConsultaDesc = novaConsulta.ConsultaDesc;
+                if (novaConsulta.ConsultaDesc != null)
+                {
+                    consulta.ConsultaDesc = novaConsulta.ConsultaDesc;
+                }
+                //consulta.ConsultaDesc = novaConsulta.ConsultaDesc;
+
                 consulta.DataConsulta = novaConsulta.DataConsulta;
                 consulta.IdMedico = novaConsulta.IdMedico;
                 consulta.IdPaciente = novaConsulta.IdPaciente;

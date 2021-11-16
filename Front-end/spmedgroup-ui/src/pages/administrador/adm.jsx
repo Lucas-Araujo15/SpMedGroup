@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../../assets/styles/adm.css'
 import logo from '../../assets/img/logo_spmedgroup_v1 1.png'
 import johnDoe from '../../assets/img/john-doe.jpg'
-import Select from 'react-select'
+//import Select from 'react-select'
 
 export default function PainelControle() {
     const [listaConsultas, setListaConsultas] = useState([]);

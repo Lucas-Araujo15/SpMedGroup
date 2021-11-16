@@ -289,6 +289,21 @@
     color: #6D6D6D;
 }
 
+.acoes-med button:nth-child(1){
+    background-color: #bb2424;
+}
+
+.acoes-med button:nth-child(2){
+    background-color: #4EC596;
+}
+
+.acoes-med button:nth-child(1), .acoes-med button:nth-child(2){
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    color:#FFFFFF
+}
+
 .acoes-med div{
     width: 350px;
     display: flex;
@@ -326,7 +341,7 @@ h1{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: width 10s, height 0.5s;
+    transition: width 10s, height 0.4s;
 }
 
 .box-lista2-med tbody{
@@ -336,5 +351,4 @@ h1{
     display: flex;
     justify-content: space-between;
     height: 100%;
-    transition: width 10s, height 0.5s;
 }
