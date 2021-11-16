@@ -1,11 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&family=Rock+Salt&display=swap');
 
 
-.box-pesquisa button{
+.box-pesquisa-pac button{
     background: #66ADA5;
     border-radius: 30px;
     height: 51px;
     width: 180px;
+}
+
+.box-pesquisa-pac{
+    display: flex;
+    width: 960px;
+    justify-content: space-between;
+}
+
+.box-pesquisa-pac button{
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 28px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.box-pesquisa-pac div{
+    width: 760px;
+    background: #FFFFFF;
+    border: 3px solid #B4BFBB;
+    box-sizing: border-box;
+    border-radius: 30px;
+}
+
+.box-pesquisa-pac input{
+    width: 90%;
+    height: 100%;
+    border-radius: 30px;
+    text-decoration: none;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    padding: 0 0 0 10px;
+}
+
+.box-pesquisa-pac input:focus{
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
 }
 
 .banner-pac{
@@ -119,17 +160,26 @@
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     height: 610px;
+    margin: 26px 0px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: width 10s, height 0.4s;
 }
 
 .lista-pac{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 1165px;
+    min-height: 1365px;
     align-items: center;
+}
+
+.status-pac div:nth-child(1){
+    background: #43706b;
+    border-radius: 0px 0px 0px 10px;
+    height: 100%;
+    width: 197px;
 }
 
 .status-pac div{
@@ -150,12 +200,13 @@
     height: 50px;
 }
 
-.status-pac div{
-    border-radius: 0px 10px;
+.status-pac div:nth-child(2){
+    border-radius: 0px 10px 0px 0px;
     background: #66ADA5;
     width: 51px;
     height: 100%;
 }
+
 .tabela-pac{
     width: 100%;
 }
@@ -251,10 +302,12 @@ h1{
     background: #FFFFFF;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
+    margin: 26px 0px;
     height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: width 10s, height 0.3s;
 }
 
 .box-lista2-pac tbody{

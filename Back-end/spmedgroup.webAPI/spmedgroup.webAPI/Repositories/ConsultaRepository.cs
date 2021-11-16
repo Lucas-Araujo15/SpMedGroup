@@ -106,6 +106,8 @@ namespace spmedgroup.webAPI.Repositories
                     Paciente paciente = ctx.Pacientes.FirstOrDefault(x => x.IdUsuario == id);
                     List<Consultum> listaPaciente = ctx.Consulta
                         .Include(x => x.IdMedicoNavigation)
+                        .Include(x => x.IdMedicoNavigation.IdEspecialidadeNavigation)
+                        .Include(x => x.IdMedicoNavigation.IdClinicaNavigation)
                         .Include(x => x.IdSituacaoNavigation)
                         .Where(x => x.IdPaciente == paciente.IdPaciente)
                         .ToList();
