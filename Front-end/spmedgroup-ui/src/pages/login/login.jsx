@@ -53,8 +53,10 @@ export default class Login extends Component {
                     if (parseJwt().role === '1') {
                         this.props.history.push('/paineldecontrole')
 
-                    } else {
-                        this.props.history.push('/')
+                    } else if (parseJwt().role === '2') {
+                        this.props.history.push('/minhasconsultas')
+                    } else if (parseJwt().role === '3') {
+                        this.props.history.push('/agendamentos')
                     }
                 }
 
@@ -63,7 +65,7 @@ export default class Login extends Component {
             .catch(
                 erro => console.log(erro)
             )
-            
+
         this.setState({
             isLoading: false
         })

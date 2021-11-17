@@ -127,7 +127,10 @@ export default function MinhasConsultas() {
                                             </tr>
                                             <tr id={'tr4' + minhaConsulta.idConsulta}>
                                                 <th>Data:</th>
-                                                <td>{minhaConsulta.dataConsulta}</td>
+                                                <td>{Intl.DateTimeFormat("pt-BR", {
+                                                    year: 'numeric', month: 'numeric', day: 'numeric',
+                                                    hour: 'numeric', minute: 'numeric'
+                                                }).format(new Date(minhaConsulta.dataConsulta))}</td>
                                             </tr>
                                             <tr id={'tr5' + minhaConsulta.idConsulta} style={{ display: 'none' }}>
                                                 <th>Clínica:</th>

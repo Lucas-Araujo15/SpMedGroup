@@ -71,7 +71,9 @@ export default function PainelControle() {
         let btnDeletar = document.getElementById('deletar' + consulta.idConsulta)
         let btnCancelar = document.getElementById('cancelar' + consulta.idConsulta)
         let btnConcluir = document.getElementById('concluir' + consulta.idConsulta)
+        let inputData = document.getElementById('data' + consulta.idConsulta)
 
+        inputData.style.setProperty('display', 'block')
         btnMin.style.setProperty('display', 'none')
         btnMax.style.setProperty('display', 'none')
         btnAtualizar.style.setProperty('display', 'none')
@@ -220,6 +222,9 @@ export default function PainelControle() {
 
         let btnMin = document.getElementById('min' + consulta.idConsulta)
         let btnMax = document.getElementById('max' + consulta.idConsulta)
+        let inputData = document.getElementById('data' + consulta.idConsulta)
+
+        inputData.style.setProperty('display', 'none')
         btnMin.style.setProperty('display', 'none')
         btnMax.style.setProperty('display', 'block')
 
@@ -428,7 +433,11 @@ export default function PainelControle() {
                                             </tr>
                                             <tr style={{ display: 'none' }} id={"input6" + consulta.idConsulta}>
                                                 <th>Data:</th>
-                                                <td><input readOnly type="date" name="data" value={consulta.dataConsulta} /></td>
+                                                <td><p>{Intl.DateTimeFormat("pt-BR", {
+                                                    year: 'numeric', month: 'numeric', day: 'numeric',
+                                                    hour: 'numeric', minute: 'numeric'
+                                                }).format(new Date(consulta.dataConsulta))}</p>
+                                                    <input id={'data' + consulta.idConsulta}style={{ display: 'none' }} type="date" onChange={d => dataEscolhida(d)} name="data" /></td>
                                             </tr>
                                             <tr style={{ display: 'none' }} id={"input7" + consulta.idConsulta}>
                                                 <th>Especialidade do médico:</th>

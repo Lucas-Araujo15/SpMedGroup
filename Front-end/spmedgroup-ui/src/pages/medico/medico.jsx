@@ -189,7 +189,10 @@ export default function Agendamentos() {
                                             </tr>
                                             <tr id={'tr5' + agendamento.idConsulta} style={{ display: 'none' }}>
                                                 <th>Data:</th>
-                                                <td>{agendamento.dataConsulta}</td>
+                                                <td>{Intl.DateTimeFormat("pt-BR", {
+                                                    year: 'numeric', month: 'numeric', day: 'numeric',
+                                                    hour: 'numeric', minute: 'numeric'
+                                                }).format(new Date(agendamento.dataConsulta))}</td>
                                             </tr>
                                             <tr id={'tr6' + agendamento.idConsulta} style={{ display: 'none' }}>
                                                 <th>Descrição da consulta:</th>
