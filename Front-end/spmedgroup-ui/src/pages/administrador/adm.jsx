@@ -15,6 +15,7 @@ export default function PainelControle() {
     const [listaPacientes, setListaPacientes] = useState([]);
     const [listaMedicos, setListaMedicos] = useState([]);
 
+
     const medicoEscolhido = (medico) => {
         setMedico(medico.target.value)
     }
@@ -92,17 +93,31 @@ export default function PainelControle() {
     }
 
     function deletar(id) {
-        axios.delete('http://localhost:5000/api/consultas/' + id, {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
-            },
-        })
-            .catch((erro) => {
-                console.log(erro)
+
+        let modal = document.getElementById('myModal')
+        let btnConfModal = document.getElementById('confirmaDel')
+        let btnCanModal = document.getElementById('cancelaDel')
+
+        modal.style.setProperty('display', 'block')
+
+        btnConfModal.onclick = function () {
+            axios.delete('http://localhost:5000/api/consultas/' + id, {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+                },
             })
+                .catch((erro) => {
+                    console.log(erro)
+                })
 
-            .then(listarConsultas)
+                .then(listarConsultas)
 
+            modal.style.setProperty('display', 'none')
+        }
+
+        btnCanModal.onclick = function () {
+            modal.style.setProperty('display', 'none')
+        }
     }
 
     function cadastrar(event) {
@@ -260,6 +275,18 @@ export default function PainelControle() {
                 </div>
             </header>
             <main>
+                <div style={{ display: 'none' }} id="myModal" class="modal">
+                    <div class="modal-content">
+                        <div>Tem certeza de que deseja deletar essa consulta?</div>
+                        <p>A operação será permanente e não será possível recuperar os dados.</p>
+                        <div>
+                            <div>
+                                <button id='cancelaDel' >Cancelar</button>
+                                <button id='confirmaDel'>Prosseguir</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <section className="banner-adm">
                     <div className="banner-container grid">
                         <div>
@@ -331,7 +358,7 @@ export default function PainelControle() {
                                     </div>
                                     <div>
                                         <label for="">Data:</label>
-                                        <input type="date" onChange={d => dataEscolhida(d)} />
+                                        <input type="datetime-local" onChange={d => dataEscolhida(d)} />
                                     </div>
                                 </div>
                                 <div className="buttons-cadastro">
@@ -437,7 +464,7 @@ export default function PainelControle() {
                                                     year: 'numeric', month: 'numeric', day: 'numeric',
                                                     hour: 'numeric', minute: 'numeric'
                                                 }).format(new Date(consulta.dataConsulta))}</p>
-                                                    <input id={'data' + consulta.idConsulta}style={{ display: 'none' }} type="date" onChange={d => dataEscolhida(d)} name="data" /></td>
+                                                    <input id={'data' + consulta.idConsulta} style={{ display: 'none' }} type="date" onChange={d => dataEscolhida(d)} name="data" /></td>
                                             </tr>
                                             <tr style={{ display: 'none' }} id={"input7" + consulta.idConsulta}>
                                                 <th>Especialidade do médico:</th>
