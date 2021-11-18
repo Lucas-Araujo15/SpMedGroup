@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../assets/styles/paciente.css'
 import logo from '../../assets/img/logo_spmedgroup_v1 1.png'
 import johnDoe from '../../assets/img/john-doe.jpg'
+import { Link } from 'react-router-dom';
 
 export default function MinhasConsultas() {
     const [listaMinhas, setListaMinhas] = useState([])
@@ -61,7 +62,7 @@ export default function MinhasConsultas() {
         <div>
             <header>
                 <div class="grid container-header">
-                    <img src={logo} alt="Logo do SP Medical Group" />
+                    <Link to="/"> <img src={logo} alt="" /></Link>
                     <div class="box-pesquisa-pac">
                         <button>Home</button>
                         <div>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../assets/styles/adm.css'
 import logo from '../../assets/img/logo_spmedgroup_v1 1.png'
 import johnDoe from '../../assets/img/john-doe.jpg'
+import { Link } from 'react-router-dom';
 //import Select from 'react-select'
 
 export default function PainelControle() {
@@ -264,7 +265,7 @@ export default function PainelControle() {
         <div>
             <header>
                 <div className="grid container-header">
-                    <img src={logo} alt="Logo do SP Medical Group" />
+                <Link to="/"> <img src={logo} alt="" /></Link>
                     <div className="box-pesquisa">
                         <button>Home</button>
                         <div>

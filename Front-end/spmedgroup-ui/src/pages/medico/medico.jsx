@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../assets/styles/medico.css'
 import logo from '../../assets/img/logo_spmedgroup_v1 1.png'
 import johnDoe from '../../assets/img/john-doe.jpg'
+import { Link } from 'react-router-dom';
 
 export default function Agendamentos() {
     const [listaAgendamentos, setListaAgendamentos] = useState([])
@@ -29,10 +30,10 @@ export default function Agendamentos() {
             })
 
             .then(ListarAgendamentos)
-            
-            setDescConsulta('')
 
-            Minimizar(agendamento)
+        setDescConsulta('')
+
+        Minimizar(agendamento)
 
 
     }
@@ -94,7 +95,7 @@ export default function Agendamentos() {
         let btnConcluir = document.getElementById('concluir' + agendamento.idConsulta)
 
         btnCancelar.style.setProperty('display', 'none')
-        btnConcluir.style.setProperty('display', 'none') 
+        btnConcluir.style.setProperty('display', 'none')
         btnManipular.style.setProperty('display', 'block')
 
         divAgendamento.classList.add('box-lista2-med')
@@ -119,7 +120,7 @@ export default function Agendamentos() {
         <div>
             <header>
                 <div class="grid container-header">
-                    <img src={logo} alt="Logo do SP Medical Group" />
+                    <Link to="/"> <img src={logo} alt="" /></Link>
                     <div className="box-pesquisa-med">
                         <button>Home</button>
                         <div>
