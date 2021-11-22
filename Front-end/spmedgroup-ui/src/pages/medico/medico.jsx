@@ -3,11 +3,12 @@ import axios from 'axios';
 import '../../assets/styles/medico.css'
 import logo from '../../assets/img/logo_spmedgroup_v1 1.png'
 import johnDoe from '../../assets/img/john-doe.jpg'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function Agendamentos() {
     const [listaAgendamentos, setListaAgendamentos] = useState([])
     const [descConsulta, setDescConsulta] = useState('')
+    const history = useHistory()
     const [addDescricao, setAddDescricao] = useState(false)
 
     const descricao = (agendamento) => {
@@ -86,6 +87,11 @@ export default function Agendamentos() {
         btnMin.style.setProperty('display', 'none')
     }
 
+    function Logout() {
+        localStorage.removeItem('login-usuario-spmedgp')
+        history.push('/login')
+    }
+
     function Minimizar(agendamento) {
 
         setAddDescricao(false)
@@ -122,7 +128,7 @@ export default function Agendamentos() {
                 <div class="grid container-header">
                     <Link to="/"> <img src={logo} alt="" /></Link>
                     <div className="box-pesquisa-med">
-                        <button>Home</button>
+                        <button onClick={Logout}>Logout</button>
                         <div>
                             <input placeholder="Busque aqui" type="text" />
                         </div>

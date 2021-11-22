@@ -3,10 +3,11 @@ import axios from 'axios';
 import '../../assets/styles/paciente.css'
 import logo from '../../assets/img/logo_spmedgroup_v1 1.png'
 import johnDoe from '../../assets/img/john-doe.jpg'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function MinhasConsultas() {
     const [listaMinhas, setListaMinhas] = useState([])
+    const history = useHistory()
 
     function ListarMinhasConsultas() {
         axios('http://localhost:5000/api/consultas/minhas', {
@@ -39,6 +40,11 @@ export default function MinhasConsultas() {
         }
     }
 
+    function Logout() {
+        localStorage.removeItem('login-usuario-spmedgp')
+        history.push('/login')
+    }
+
     function Minimizar(minhaConsulta) {
         let divMinhaConsulta = document.getElementById(minhaConsulta.idConsulta)
         let btnMin = document.getElementById('min' + minhaConsulta.idConsulta)
@@ -64,7 +70,7 @@ export default function MinhasConsultas() {
                 <div class="grid container-header">
                     <Link to="/"> <img src={logo} alt="" /></Link>
                     <div class="box-pesquisa-pac">
-                        <button>Home</button>
+                        <button onClick={Logout}>Logout</button>
                         <div>
                             <input placeholder="Busque aqui" type="text" />
                         </div>

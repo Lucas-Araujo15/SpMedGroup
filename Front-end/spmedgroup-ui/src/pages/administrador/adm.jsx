@@ -3,7 +3,8 @@ import axios from 'axios';
 import '../../assets/styles/adm.css'
 import logo from '../../assets/img/logo_spmedgroup_v1 1.png'
 import johnDoe from '../../assets/img/john-doe.jpg'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+
 //import Select from 'react-select'
 
 export default function PainelControle() {
@@ -15,6 +16,7 @@ export default function PainelControle() {
     const [data, setData] = useState(new Date());
     const [listaPacientes, setListaPacientes] = useState([]);
     const [listaMedicos, setListaMedicos] = useState([]);
+    const history = useHistory()
 
 
     const medicoEscolhido = (medico) => {
@@ -38,6 +40,11 @@ export default function PainelControle() {
         setPaciente(0)
         setSituacao(0)
         setData(new Date())
+    }
+
+    function Logout() {
+        localStorage.removeItem('login-usuario-spmedgp')
+        history.push('/login')
     }
 
     function atualizar(consulta) {
@@ -267,7 +274,7 @@ export default function PainelControle() {
                 <div className="grid container-header">
                 <Link to="/"> <img src={logo} alt="" /></Link>
                     <div className="box-pesquisa">
-                        <button>Home</button>
+                        <button onClick={Logout}>Logout</button>
                         <div>
                             <input placeholder="Busque aqui" type="text" />
                         </div>
