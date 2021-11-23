@@ -43,7 +43,7 @@ header{
     width: 950px;
 }
 
-.box-header a{
+.box-header a, .box-header button{
     font-family: Poppins;
     font-style: normal;
     font-weight: normal;
@@ -53,9 +53,10 @@ header{
     color: black;
 }
 
-.box-header a:nth-child(5){
+.box-header a:nth-child(6), .box-header button{
     border: 3px solid #4EC596;
     border-radius: 41px;
+    background: transparent;
     width: 170px;
     height: 40px;
     display: flex;

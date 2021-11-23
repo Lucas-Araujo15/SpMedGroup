@@ -25,6 +25,11 @@ export default class App extends Component {
     super(props);
   }
 
+  Logout = () => {
+    localStorage.removeItem('login-usuario-spmedgp')
+    this.props.history.push('/')
+  }
+
   Entrar = () => {
     if (usuarioAutenticado() === true) {
       if (parseJwt().role === '1') {
@@ -54,7 +59,8 @@ export default class App extends Component {
               <a href="">especialidades</a>
               <a href="">fale conosco</a>
               <a href="">convênios</a>
-              <Link to="/login">login</Link>
+              <button onClick={this.Logout} style={usuarioAutenticado() === true ? { display: 'block' } : { display: 'none' }}>logout</button>
+              <Link style={usuarioAutenticado() === true ? { display: 'none' } : { display: 'flex' }} to="/login">login</Link>
             </nav>
           </div>
         </header>
