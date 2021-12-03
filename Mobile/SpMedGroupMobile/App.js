@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { MobileStepper } from '@mui/material/MobileStepper';
 
-import { StatusBar, StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet, Text } from 'react-native';
 
 import Introducao from './src/screens/introducao';
 import Login from './src/screens/login';

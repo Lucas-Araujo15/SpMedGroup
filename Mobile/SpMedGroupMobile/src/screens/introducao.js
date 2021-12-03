@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
     },
 
     imgIntro: {
-        width: 413
+        width: 400,
+        height: 371
     },
 
     h1: {
