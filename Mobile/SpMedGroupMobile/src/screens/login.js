@@ -9,9 +9,37 @@ import {
     TextInput,
 } from 'react-native';
 
+import api from '../services/api';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export default class Login extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            email: 'roberto.possarle@spmedicalgroup.com.br',
+            senha: 'roJKL123'
+        }
+    }
+
+
+    Logar = async () => {
+        const requisicao = await api.post('/login', {
+            email: this.state.email,
+            senha: this.state.senha
+        })
+
+        const token = requisicao.data.token
+
+        AsyncStorage.setItem('senai-SpMedicalGroup-chave-autenticacao', token)
+
+
+        if (requisicao.status == 200) {
+            this.props.navigation.navigate('Main')
+            
+        }
+
+
     }
 
     render() {
@@ -28,13 +56,15 @@ export default class Login extends Component {
                     <TextInput style={styles.inputs}
                         placeholder="E-mail"
                         placeholderTextColor="#AAAAAA"
+                        onChangeText={email => this.setState({ email })}
                     />
                     <TextInput
                         placeholder="Senha"
                         style={styles.inputs}
                         placeholderTextColor="#AAAAAA"
+                        onChangeText={senha => this.setState({ senha })}
                     />
-                    <TouchableOpacity style={styles.btnEntrar}>
+                    <TouchableOpacity onPress={this.Logar} style={styles.btnEntrar}>
                         <Text style={styles.btnTxt}>Entrar</Text>
                     </TouchableOpacity>
                 </View>
@@ -80,7 +110,7 @@ const styles = StyleSheet.create({
         paddingLeft: 10
     },
 
-    btnEntrar:{
+    btnEntrar: {
         width: '100%',
         height: 60,
         borderRadius: 10,
@@ -89,7 +119,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
-    btnTxt:{
+    btnTxt: {
         color: '#FFF',
         fontFamily: 'Poppins-SemiBold',
         fontSize: 20
