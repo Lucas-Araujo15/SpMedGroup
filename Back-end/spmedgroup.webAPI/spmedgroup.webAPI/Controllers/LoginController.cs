@@ -26,6 +26,7 @@ namespace spmedgroup.webAPI.Controllers
         [HttpPost]
         public IActionResult Entrar(LoginViewModel login)
         {
+
             try
             {
                 Usuario usuarioBuscado = usuarioRepository.Login(login.email, login.senha);

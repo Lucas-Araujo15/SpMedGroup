@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import jwt_decode from "jwt-decode";
 
 import api from '../services/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -9,8 +10,6 @@ import {
     TouchableOpacity,
     View,
     FlatList,
-    Image,
-    TextInput,
     ScrollView
 } from 'react-native';
 
@@ -20,7 +19,8 @@ export default class Lista extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            listaConsultas: []
+            listaConsultas: [],
+            usuarioAtual: 0
         }
     }
 
@@ -28,31 +28,35 @@ export default class Lista extends Component {
         const token = await AsyncStorage.getItem('senai-SpMedicalGroup-chave-autenticacao')
         console.warn(token)
 
+
+
         const requisicao = await api.get('/consultas/minhas', {
             headers: {
                 Authorization: 'Bearer ' + token
             }
         })
 
+        const user = jwt_decode(token)
+        // console.warn(user)
+
         const dados = requisicao.data
 
         this.setState({
-            listaConsultas: dados
+            listaConsultas: dados,
+            usuarioAtual: user.role
         })
     }
 
     componentDidMount() {
         this.ListarConsultas()
-
     }
 
     render() {
         return (
             <ScrollView>
-
                 <View style={styles.body}>
                     <View style={styles.header}>
-                        <Text style={styles.txtHeader}>Bom dia, John Doe!</Text>
+                        <Text style={styles.txtHeader}>Bem vindo!</Text>
                     </View>
                     <View style={styles.main}>
                         <View style={styles.tituloAbas}>
@@ -76,20 +80,39 @@ export default class Lista extends Component {
         )
     }
 
+
+
     renderItem = ({ item }) => (
         <View style={styles.boxItem}>
             <View style={styles.boxHeader}>
+                <View style={styles.td}>{
+                    this.state.usuarioAtual == 2 ? <Text style={styles.tdTxt}>Médico</Text> : <Text style={styles.tdTxt}>Paciente</Text>
+                }
+                    {
+                        this.state.usuarioAtual == 2 ? <Text style={styles.valorConsulta}>{item.idMedicoNavigation.nomeMedico}</Text> : <Text style={styles.valorConsulta}>{item.idPacienteNavigation.nomePaciente}</Text>
+                    }
+                </View>
                 <View style={styles.td}>
-                    <Text>Médico</Text>
-                    <Text>John Doe</Text>
+                    {
+                        this.state.usuarioAtual == 2 ? <Text style={styles.tdTxt}>Especialidade</Text> : <Text style={styles.tdTxt}>RG do paciente</Text>
+                    }
+                    {
+                        this.state.usuarioAtual == 2 ? <Text style={styles.valorConsulta}>{item.idMedicoNavigation.idEspecialidadeNavigation.nomeEspecialidade}</Text> : <Text style={styles.valorConsulta}>{item.idPacienteNavigation.rgPaciente}</Text>
+                    }
+
                 </View>
-                <View>
-                    <Text>Especialidade</Text>
-                    <Text>Ortopedia</Text>
+                <View style={styles.td}>
+                    <Text style={styles.tdTxt}>Data</Text>
+                    <Text style={styles.valorConsulta}>{Intl.DateTimeFormat("pt-BR", {
+                        year: 'numeric', month: 'numeric', day: 'numeric'
+                    }).format(new Date(item.dataConsulta))}
+                    </Text>
                 </View>
-                <View>
-                    <Text>Data</Text>
-                    <Text>09/11/2021</Text>
+            </View>
+            <View style={styles.containerDesc}>
+                <View style={styles.boxDesc}>
+                    <Text style={styles.tdTxt}>Descrição:</Text>
+                    <Text style={styles.descTxt}>{item.consultaDesc} </Text>
                 </View>
             </View>
         </View>
@@ -152,12 +175,12 @@ const styles = StyleSheet.create({
     btnSelecionado: {
         width: 130,
         height: 39,
-        shadowColor: 'rgba(0,0,0, .4)', // IOS
-        shadowOffset: { height: 1, width: 1 }, // IOS
-        shadowOpacity: 1, // IOS
-        shadowRadius: 1, //IOS
+        shadowColor: 'rgba(0,0,0, .4)',
+        shadowOffset: { height: 1, width: 1 },
+        shadowOpacity: 1,
+        shadowRadius: 1,
         backgroundColor: '#fff',
-        elevation: 8, // Android
+        elevation: 8,
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
@@ -181,27 +204,60 @@ const styles = StyleSheet.create({
     boxItem: {
         width: 361,
         height: 205,
-        shadowColor: 'rgba(0,0,0, .4)', 
+        shadowColor: 'rgba(0,0,0, .4)',
         shadowOffset: { height: 1, width: 1 },
-        shadowOpacity: 4, 
-        shadowRadius: 4, 
+        shadowOpacity: 4,
+        shadowRadius: 4,
         backgroundColor: '#fff',
-        elevation: 8, 
+        elevation: 8,
         marginBottom: 20,
         marginTop: 20,
         borderRadius: 20,
-        
+        alignItems: 'center'
+
     },
 
-    boxHeader:{
+    boxHeader: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        height: '25%'
+        height: '35%',
+        width: '90%',
+
     },
 
-    td:{
+    td: {
         alignItems: 'center',
-        justifyContent:'space-between'
-    }
+        justifyContent: 'space-evenly',
+    },
 
+    tdTxt: {
+        fontFamily: 'Poppins-Regular',
+        color: '#838383',
+        fontSize: 14
+    },
+
+    valorConsulta: {
+        fontFamily: 'Poppins-Bold',
+        fontSize: 14,
+        color: '#000'
+    },
+
+    containerDesc: {
+        width: '90%',
+        height: '55%',
+        borderTopWidth: 2,
+        borderColor: '#E3E3E3',
+        justifyContent: 'flex-end'
+
+    },
+
+    boxDesc: {
+        height: '90%',
+    },
+
+    descTxt: {
+        fontFamily: 'Poppins-Regular',
+        color: '#000',
+        fontSize: 14
+    }
 })
