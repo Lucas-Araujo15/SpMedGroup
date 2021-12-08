@@ -17,8 +17,10 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: 'roberto.possarle@spmedicalgroup.com.br',
-            senha: 'roJKL123'
+            //email: 'ligia@gmail.com',
+            //senha: 'laPQR123',
+            email: 'ricardo.lemos@spmedicalgroup.com.br',
+            senha: 'roGHI123'
         }
     }
 
@@ -36,7 +38,7 @@ export default class Login extends Component {
 
         if (requisicao.status == 200) {
             this.props.navigation.navigate('Main')
-            
+
         }
 
 
@@ -91,8 +93,8 @@ const styles = StyleSheet.create({
     },
 
     imgLogin: {
-        width: 380,
-        height: 371
+        width: '100%',
+        height: '55%'
     },
 
     vwInputs: {

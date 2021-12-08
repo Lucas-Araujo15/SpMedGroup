@@ -67,13 +67,16 @@ export default class Lista extends Component {
                                 <TouchableOpacity style={styles.btnNaoSelecionado}><Text>Canceladas</Text></TouchableOpacity>
                             </View>
                         </View>
-                        <View style={styles.Lista}>
+                        
                             <FlatList
+                                contentContainerStyle={styles.listaConteudo}
                                 data={this.state.listaConsultas}
                                 keyExtractor={item => item.idConsulta}
                                 renderItem={this.renderItem}
                             />
-                        </View>
+
+                        
+
                     </View>
                 </View>
             </ScrollView>
@@ -86,18 +89,18 @@ export default class Lista extends Component {
         <View style={styles.boxItem}>
             <View style={styles.boxHeader}>
                 <View style={styles.td}>{
-                    this.state.usuarioAtual == 2 ? <Text style={styles.tdTxt}>Médico</Text> : <Text style={styles.tdTxt}>Paciente</Text>
+                    this.state.usuarioAtual == 2 ? <Text adjustsFontSizeToFit={true} style={styles.tdTxt}>Médico</Text> : <Text style={styles.tdTxt}>Paciente</Text>
                 }
                     {
-                        this.state.usuarioAtual == 2 ? <Text style={styles.valorConsulta}>{item.idMedicoNavigation.nomeMedico}</Text> : <Text style={styles.valorConsulta}>{item.idPacienteNavigation.nomePaciente}</Text>
+                        this.state.usuarioAtual == 2 ? <Text adjustsFontSizeToFit={true} style={styles.valorConsulta}>{item.idMedicoNavigation.nomeMedico}</Text> : <Text style={styles.valorConsulta}>{item.idPacienteNavigation.nomePaciente}</Text>
                     }
                 </View>
                 <View style={styles.td}>
                     {
-                        this.state.usuarioAtual == 2 ? <Text style={styles.tdTxt}>Especialidade</Text> : <Text style={styles.tdTxt}>RG do paciente</Text>
+                        this.state.usuarioAtual == 2 ? <Text adjustsFontSizeToFit={true} style={styles.tdTxt}>Especialidade</Text> : <Text style={styles.tdTxt}>RG do paciente</Text>
                     }
                     {
-                        this.state.usuarioAtual == 2 ? <Text style={styles.valorConsulta}>{item.idMedicoNavigation.idEspecialidadeNavigation.nomeEspecialidade}</Text> : <Text style={styles.valorConsulta}>{item.idPacienteNavigation.rgPaciente}</Text>
+                        this.state.usuarioAtual == 2 ? <Text adjustsFontSizeToFit={true} style={styles.valorConsulta}>{item.idMedicoNavigation.idEspecialidadeNavigation.nomeEspecialidade}</Text> : <Text style={styles.valorConsulta}>{item.idPacienteNavigation.rgPaciente}</Text>
                     }
 
                 </View>
@@ -121,9 +124,6 @@ export default class Lista extends Component {
 
 const styles = StyleSheet.create({
 
-    body: {
-        alignItems: 'center'
-    },
 
     header: {
         backgroundColor: '#25AEFB',
@@ -158,7 +158,8 @@ const styles = StyleSheet.create({
     },
 
     main: {
-        width: '90%'
+        width: '100%',
+        alignItems: 'center'
     },
 
     abas: {
@@ -169,7 +170,8 @@ const styles = StyleSheet.create({
 
     tituloAbas: {
         height: 130,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width: '90%'
     },
 
     btnSelecionado: {
@@ -202,7 +204,7 @@ const styles = StyleSheet.create({
     },
 
     boxItem: {
-        width: 361,
+        alignItems: 'center',
         height: 205,
         shadowColor: 'rgba(0,0,0, .4)',
         shadowOffset: { height: 1, width: 1 },
@@ -219,10 +221,9 @@ const styles = StyleSheet.create({
 
     boxHeader: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
         height: '35%',
-        width: '90%',
-
+        width: '100%',
     },
 
     td: {
@@ -259,5 +260,9 @@ const styles = StyleSheet.create({
         fontFamily: 'Poppins-Regular',
         color: '#000',
         fontSize: 14
+    },
+
+    listaConteudo:{
+        width: '90%',
     }
 })
