@@ -23,8 +23,11 @@ export default class Main extends Component {
             <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />} initialRouteName="Lista"
 
                 screenOptions={{
+                    headerShown: false,
                     drawerStyle: {
-                        backgroundColor: '#25AEFB'
+                        backgroundColor: '#25AEFB',
+                        borderBottomRightRadius: 20,
+                        borderTopRightRadius: 20
                     },
                 }}
             >

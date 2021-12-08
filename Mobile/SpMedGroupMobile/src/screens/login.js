@@ -19,8 +19,10 @@ export default class Login extends Component {
         this.state = {
             //email: 'ligia@gmail.com',
             //senha: 'laPQR123',
-            email: 'ricardo.lemos@spmedicalgroup.com.br',
-            senha: 'roGHI123'
+            //email: 'ricardo.lemos@spmedicalgroup.com.br',
+            //senha: 'roGHI123'
+            email: 'roberto.possarle@spmedicalgroup.com.br',
+            senha: 'roJKL123',
         }
     }
 
