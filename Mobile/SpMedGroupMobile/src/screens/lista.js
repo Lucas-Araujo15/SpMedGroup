@@ -25,7 +25,7 @@ export default class Lista extends Component {
             listaConsultas: [],
             usuarioAtual: 0,
             modalVisible: false,
-            consultaSelecionada: null
+            consultaSelecionada: {}
         }
     }
 
@@ -52,21 +52,26 @@ export default class Lista extends Component {
         })
     }
 
-    MostrarModal = (teste) => {
+    MostrarModal = (idConsulta) => {
 
-        console.warn(teste)
+        //console.warn(teste)
 
         let consulta = this.state.listaConsultas.filter(modalConsulta => {
-            return modalConsulta.idConsulta == teste
+            return modalConsulta.idConsulta == idConsulta
         })
 
 
         this.setState({
             modalVisible: true,
-            consultaSelecionada: consulta
+            consultaSelecionada: consulta[0]
         })
+        //[].idPacienteNavigation -> X
 
-        //console.warn(consulta)
+        //[0] -> {}
+
+        //{}.idPacienteNavigation -> V
+
+         console.warn(this.state.consultaSelecionada)
     }
 
     componentDidMount() {
