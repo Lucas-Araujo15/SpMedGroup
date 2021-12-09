@@ -60,7 +60,7 @@ export default class Lista extends Component {
             return modalConsulta.idConsulta == teste
         })
 
-      
+
         this.setState({
             modalVisible: true,
             consultaSelecionada: consulta
@@ -134,7 +134,7 @@ export default class Lista extends Component {
     renderItem = ({ item }) => (
         <TouchableOpacity
             activeOpacity={0.8}
-            onPress={this.MostrarModal(item.idConsulta)}
+            onPress={() => this.MostrarModal(item.idConsulta)}
         >
             <View style={styles.boxItem}>
                 <View style={styles.boxHeader}>
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         marginTop: 20,
         borderRadius: 20,
-        alignItems: 'center'
+        alignItems: 'center',
 
     },
 
@@ -316,7 +316,8 @@ const styles = StyleSheet.create({
     },
 
     listaConteudo: {
-        width: '90%',
+        width: '100%',
+        paddingHorizontal: '5%'
     },
 
     viewHeader: {
