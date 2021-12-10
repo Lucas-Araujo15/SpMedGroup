@@ -445,6 +445,9 @@ const styles = StyleSheet.create({
     },
 
     tdModalDesc: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 17,
+        color: '#000',
         height: '75%'
     }
 })
