@@ -34,7 +34,7 @@ export default class Introducao extends Component {
                     source={require('../../assets/img/imgIntro.png')}
                     style={styles.imgIntro}
                 />
-                <View>
+                <View style={styles.txtIntro}>
                     <Text style={styles.contentIntro}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sollicitudin metus.</Text>
                 </View>
                 <TouchableOpacity onPress={this.Avancar}>
@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
     },
 
     imgIntro: {
-        width: 400,
-        height: 371
+        width: '100%',
+        height: '60%'
     },
 
     h1: {
@@ -75,8 +75,12 @@ const styles = StyleSheet.create({
 
     contentIntro: {
         fontFamily: 'Poppins-Regular',
-        fontSize: 17,
+        fontSize: 15,
         textAlign: 'center',
         color: '#000'
+    },
+
+    txtIntro:{
+        width: '90%'
     }
 })

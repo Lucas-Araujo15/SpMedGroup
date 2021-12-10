@@ -31,10 +31,6 @@ export default class Lista extends Component {
 
     ListarConsultas = async () => {
         const token = await AsyncStorage.getItem('senai-SpMedicalGroup-chave-autenticacao')
-        console.warn(token)
-
-
-
         const requisicao = await api.get('/consultas/minhas', {
             headers: {
                 Authorization: 'Bearer ' + token
@@ -105,12 +101,20 @@ export default class Lista extends Component {
                                         </View>
                                         <View style={styles.containerInfoModal}>
                                             <View style={styles.infoModal}>
-                                                <Text style={styles.thModal}>Paciente: </Text>
-                                                <Text style={styles.tdModal}>{this.state.consultaSelecionada.idPacienteNavigation.nomePaciente}</Text>
+                                                {
+                                                    this.state.usuarioAtual == 2 ? <Text style={styles.thModal}>Médico: </Text> : <Text style={styles.thModal}>Paciente: </Text>
+                                                }
+                                                {
+                                                    this.state.usuarioAtual == 2 ? <Text style={styles.tdModal}>{this.state.consultaSelecionada.idMedicoNavigation.nomeMedico}</Text> : <Text style={styles.tdModal}>{this.state.consultaSelecionada.idPacienteNavigation.nomePaciente}</Text>
+                                                }
                                             </View>
                                             <View style={styles.infoModal}>
-                                                <Text style={styles.thModal}>RG do paciente: </Text>
-                                                <Text style={styles.tdModal}>{this.state.consultaSelecionada.idPacienteNavigation.rgPaciente}</Text>
+                                                {
+                                                    this.state.usuarioAtual == 2 ? <Text style={styles.thModal}>CRM: </Text> : <Text style={styles.thModal}>RG do paciente: </Text>
+                                                }
+                                                {
+                                                    this.state.usuarioAtual == 2 ? <Text style={styles.tdModal}>{this.state.consultaSelecionada.idMedicoNavigation.crm}</Text> : <Text style={styles.tdModal}>{this.state.consultaSelecionada.idPacienteNavigation.rgPaciente}</Text>
+                                                }
                                             </View>
                                             <View style={styles.infoModal}>
                                                 <Text style={styles.thModal}>Data: </Text>
@@ -122,8 +126,13 @@ export default class Lista extends Component {
                                                 </Text>
                                             </View>
                                             <View >
-                                                <Text style={styles.thModal}>Endereço do paciente: </Text>
-                                                <Text style={styles.tdModal}>{this.state.consultaSelecionada.idPacienteNavigation.endPaciente}</Text>
+                                                {
+                                                    this.state.usuarioAtual == 2 ? <Text style={styles.thModal}>Especialidade do médico: </Text> : <Text style={styles.thModal}>Endereço do paciente: </Text>
+                                                }
+                                                {
+                                                    this.state.usuarioAtual == 2 ? <Text style={styles.tdModal}>{this.state.consultaSelecionada.idMedicoNavigation.idEspecialidadeNavigation.nomeEspecialidade}</Text> : <Text style={styles.tdModal}>{this.state.consultaSelecionada.idPacienteNavigation.endPaciente}</Text>
+                                                }
+
                                             </View>
                                             <View style={styles.infoModal}>
                                                 <Text style={styles.thModal}>Telefone do paciente: </Text>

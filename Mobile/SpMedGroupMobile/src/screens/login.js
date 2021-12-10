@@ -19,10 +19,10 @@ export default class Login extends Component {
         this.state = {
             //email: 'ligia@gmail.com',
             //senha: 'laPQR123',
-            //email: 'ricardo.lemos@spmedicalgroup.com.br',
-            //senha: 'roGHI123'
-            email: 'roberto.possarle@spmedicalgroup.com.br',
-            senha: 'roJKL123',
+            email: 'ricardo.lemos@spmedicalgroup.com.br',
+            senha: 'roGHI123'
+            //email: 'roberto.possarle@spmedicalgroup.com.br',
+            //senha: 'roJKL123',
         }
     }
 
@@ -37,10 +37,8 @@ export default class Login extends Component {
 
         AsyncStorage.setItem('senai-SpMedicalGroup-chave-autenticacao', token)
 
-
         if (requisicao.status == 200) {
             this.props.navigation.navigate('Main')
-
         }
 
 
@@ -64,6 +62,7 @@ export default class Login extends Component {
                     />
                     <TextInput
                         placeholder="Senha"
+                        secureTextEntry={true}
                         style={styles.inputs}
                         placeholderTextColor="#AAAAAA"
                         onChangeText={senha => this.setState({ senha })}

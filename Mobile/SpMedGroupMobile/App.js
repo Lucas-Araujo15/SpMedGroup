@@ -19,7 +19,8 @@ class App extends Component {
     return (
       <NavigationContainer>
         <StatusBar
-          hidden={true}
+          hidden={false}
+          backgroundColor="#25AEFB"
         />
         <AuthStack.Navigator
           screenOptions={{
