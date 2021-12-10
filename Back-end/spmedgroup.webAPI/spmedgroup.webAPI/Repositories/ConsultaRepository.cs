@@ -120,6 +120,7 @@ namespace spmedgroup.webAPI.Repositories
                         .Include(x => x.IdPacienteNavigation)
                         .Include(x => x.IdMedicoNavigation)
                         .Include(x => x.IdSituacaoNavigation)
+                        .Include(x => x.IdMedicoNavigation.IdClinicaNavigation)
                         .Include(x => x.IdSituacaoNavigation)
                         .Where(x => x.IdMedicoNavigation.IdUsuario == id || x.IdPacienteNavigation.IdUsuario == id)
                         .ToList();

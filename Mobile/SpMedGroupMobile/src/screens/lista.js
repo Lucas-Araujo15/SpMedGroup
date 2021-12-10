@@ -25,7 +25,7 @@ export default class Lista extends Component {
             listaConsultas: [],
             usuarioAtual: 0,
             modalVisible: false,
-            consultaSelecionada: {}
+            consultaSelecionada: []
         }
     }
 
@@ -52,8 +52,11 @@ export default class Lista extends Component {
         })
     }
 
-    MostrarModal = (idConsulta) => {
+    MostrarModal = async (idConsulta) => {
 
+        this.setState({
+            consultaSelecionada: []
+        })
         //console.warn(teste)
 
         let consulta = this.state.listaConsultas.filter(modalConsulta => {
@@ -61,7 +64,7 @@ export default class Lista extends Component {
         })
 
 
-        this.setState({
+        await this.setState({
             modalVisible: true,
             consultaSelecionada: consulta[0]
         })
@@ -71,7 +74,7 @@ export default class Lista extends Component {
 
         //{}.idPacienteNavigation -> V
 
-         console.warn(this.state.consultaSelecionada)
+        //console.warn(this.state.consultaSelecionada)
     }
 
     componentDidMount() {
@@ -92,6 +95,53 @@ export default class Lista extends Component {
                 >
                     <View style={styles.bodyModal}>
                         <View style={styles.boxModal}>
+                            {
+                                this.state.modalVisible === true ?
+                                    <View>
+                                        <View style={styles.modalSair}>
+                                            <TouchableOpacity onPress={() => this.setState({ modalVisible: false })}>
+                                                <Icon name="close" size={25} color='#000' name='close' />
+                                            </TouchableOpacity>
+                                        </View>
+                                        <View style={styles.containerInfoModal}>
+                                            <View style={styles.infoModal}>
+                                                <Text style={styles.thModal}>Paciente: </Text>
+                                                <Text style={styles.tdModal}>{this.state.consultaSelecionada.idPacienteNavigation.nomePaciente}</Text>
+                                            </View>
+                                            <View style={styles.infoModal}>
+                                                <Text style={styles.thModal}>RG do paciente: </Text>
+                                                <Text style={styles.tdModal}>{this.state.consultaSelecionada.idPacienteNavigation.rgPaciente}</Text>
+                                            </View>
+                                            <View style={styles.infoModal}>
+                                                <Text style={styles.thModal}>Data: </Text>
+                                                <Text style={styles.tdModal}>
+                                                    {Intl.DateTimeFormat("pt-BR", {
+                                                        year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric',
+                                                        hour12: false
+                                                    }).format(new Date(this.state.consultaSelecionada.dataConsulta))}
+                                                </Text>
+                                            </View>
+                                            <View >
+                                                <Text style={styles.thModal}>Endereço do paciente: </Text>
+                                                <Text style={styles.tdModal}>{this.state.consultaSelecionada.idPacienteNavigation.endPaciente}</Text>
+                                            </View>
+                                            <View style={styles.infoModal}>
+                                                <Text style={styles.thModal}>Telefone do paciente: </Text>
+                                                <Text style={styles.tdModal}>{this.state.consultaSelecionada.idPacienteNavigation.telPaciente}</Text>
+                                            </View>
+                                            <View style={styles.infoModal}>
+                                                <Text style={styles.thModal}>Clínica: </Text>
+                                                <Text style={styles.tdModal}>{this.state.consultaSelecionada.idMedicoNavigation.idClinicaNavigation.nomeFantasia}</Text>
+                                            </View>
+                                            <View style={styles.modalDesc}>
+                                                <Text style={styles.thModal}>Descrição da consulta: </Text>
+                                                <Text style={styles.tdModalDesc}>{this.state.consultaSelecionada.consultaDesc}</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+
+                                    : null
+                            }
                         </View>
                     </View>
                 </Modal>
@@ -352,10 +402,49 @@ const styles = StyleSheet.create({
     },
 
     boxModal: {
+        padding: '3%',
         height: '85%',
         backgroundColor: '#fff',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20
-    }
+    },
 
+    modalSair: {
+        width: '100%',
+        alignItems: 'flex-end'
+    },
+
+    infoModal: {
+        flexDirection: 'row',
+
+    },
+
+    containerInfoModal: {
+        justifyContent: 'space-between',
+        height: '95%',
+        width: '100%'
+    },
+
+    thModal: {
+        fontFamily: 'Poppins-Bold',
+        fontSize: 17,
+        color: '#000'
+    },
+
+    tdModal: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 17,
+        color: '#000'
+    },
+
+    modalDesc: {
+        borderTopWidth: 2,
+        borderColor: '#E3E3E3',
+        height: '40%',
+        justifyContent: 'flex-end'
+    },
+
+    tdModalDesc: {
+        height: '75%'
+    }
 })
