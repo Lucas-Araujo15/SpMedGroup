@@ -55,7 +55,7 @@ export default function PainelControle() {
             dataConsulta: data
         }
 
-        axios.put('http://localhost:5000/api/consultas/' + consulta.idConsulta, dadosAtualizados, {
+        axios.put('http://192.168.3.159:5000/api/consultas/' + consulta.idConsulta, dadosAtualizados, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             },
@@ -109,7 +109,7 @@ export default function PainelControle() {
         modal.style.setProperty('display', 'block')
 
         btnConfModal.onclick = function () {
-            axios.delete('http://localhost:5000/api/consultas/' + id, {
+            axios.delete('http://192.168.3.159:5000/api/consultas/' + id, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
                 },
@@ -139,7 +139,7 @@ export default function PainelControle() {
             dataConsulta: data
         }
 
-        axios.post('http://localhost:5000/api/consultas', consulta, {
+        axios.post('http://192.168.3.159:5000/api/consultas', consulta, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             },
@@ -155,7 +155,7 @@ export default function PainelControle() {
 
 
     function listarConsultas() {
-        axios('http://localhost:5000/api/consultas', {
+        axios('http://192.168.3.159:5000/api/consultas', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             }
@@ -170,7 +170,7 @@ export default function PainelControle() {
     }
 
     function listarPacientes() {
-        axios('http://localhost:5000/api/pacientes', {
+        axios('http://192.168.3.159:5000/api/pacientes', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             }
@@ -187,7 +187,7 @@ export default function PainelControle() {
     }
 
     function listarMedicos() {
-        axios('http://localhost:5000/api/medicos', {
+        axios('http://192.168.3.159:5000/api/medicos', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             }
@@ -201,7 +201,7 @@ export default function PainelControle() {
     }
 
     function listarSituacoes() {
-        axios('http://localhost:5000/api/situacoes', {
+        axios('http://192.168.3.159:5000/api/situacoes', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             }

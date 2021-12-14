@@ -9,8 +9,8 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: '',
-            senha: '',
+            email: 'roberto.possarle@spmedicalgroup.com.br',
+            senha: 'roJKL123',
             isLoading: false,
             erroMensagem: ''
         }
@@ -37,7 +37,7 @@ export default class Login extends Component {
             isLoading: true
         })
 
-        axios.post('http://localhost:5000/api/login', {
+        axios.post('http://192.168.3.159:5000/api/login', {
             email: this.state.email,
             senha: this.state.senha
         })

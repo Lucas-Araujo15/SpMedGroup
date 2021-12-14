@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GoogleMaps.LocationServices;
+using Microsoft.EntityFrameworkCore;
 using spmedgroup.webAPI.Contexts;
 using spmedgroup.webAPI.Domains;
 using spmedgroup.webAPI.Interfaces;
@@ -70,6 +71,27 @@ namespace spmedgroup.webAPI.Repositories
 
         public void Cadastrar(Consultum consulta)
         {
+            int idade = DateTime.Now.Year - Convert.ToDateTime(consulta.IdPacienteNavigation.DataNascPaciente).Year;
+            if (DateTime.Now.DayOfYear < Convert.ToDateTime(consulta.IdPacienteNavigation.DataNascPaciente).DayOfYear)
+            {
+                idade--;
+            }
+
+            var locationService = new GoogleLocationService();
+            var point = locationService.GetLatLongFromAddress(consulta.IdPacienteNavigation.EndPaciente);
+
+            Localizacao localicazao = new()
+            {
+                IdadePaciente = Convert.ToString(idade),
+                Descricao = consulta.ConsultaDesc,
+                EspecialidadeMedico = consulta.IdMedicoNavigation.IdEspecialidadeNavigation.NomeEspecialidade,
+                Latitude = Convert.ToString(point.Latitude),
+                Longitude = Convert.ToString(point.Longitude)              
+            };
+
+            LocalizacaoRepository localizacaoRepository = new();
+
+            localizacaoRepository.Cadastrar(localicazao);
             ctx.Consulta.Add(consulta);
             ctx.SaveChanges();
         }

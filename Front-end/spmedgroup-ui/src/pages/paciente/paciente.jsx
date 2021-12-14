@@ -10,7 +10,7 @@ export default function MinhasConsultas() {
     const history = useHistory()
 
     function ListarMinhasConsultas() {
-        axios('http://localhost:5000/api/consultas/minhas', {
+        axios('http://192.168.3.159:5000/api/consultas/minhas', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             },

@@ -20,7 +20,7 @@ export default function Agendamentos() {
             consultaDesc: descConsulta
         }
 
-        axios.patch('http://localhost:5000/api/consultas/descricao/' + agendamento.idConsulta, descAtualizada, {
+        axios.patch('http://192.168.3.159:5000/api/consultas/descricao/' + agendamento.idConsulta, descAtualizada, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             },
@@ -40,7 +40,7 @@ export default function Agendamentos() {
     }
 
     function ListarAgendamentos() {
-        axios('http://localhost:5000/api/consultas/minhas', {
+        axios('http://192.168.3.159:5000/api/consultas/minhas', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             },
