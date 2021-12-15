@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import axios from 'axios';
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import api from "../../services/api";
 import '../../assets/styles/adm.css'
 import logo from '../../assets/img/logo_spmedgroup_v1 1.png'
 import johnDoe from '../../assets/img/john-doe.jpg'
@@ -7,7 +8,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 //import Select from 'react-select'
 
-export default function PainelControle() {
+function PainelControle() {
     const [listaConsultas, setListaConsultas] = useState([]);
     const [listaSituacoes, setListaSituacoes] = useState([]);
     const [idPaciente, setPaciente] = useState(0);
@@ -16,6 +17,7 @@ export default function PainelControle() {
     const [data, setData] = useState(new Date());
     const [listaPacientes, setListaPacientes] = useState([]);
     const [listaMedicos, setListaMedicos] = useState([]);
+    const [listaLocalizacoes, setListaLocalizacoes] = useState([])
     const history = useHistory()
 
 
@@ -55,7 +57,7 @@ export default function PainelControle() {
             dataConsulta: data
         }
 
-        axios.put('http://192.168.3.159:5000/api/consultas/' + consulta.idConsulta, dadosAtualizados, {
+        api.put('/consultas/' + consulta.idConsulta, dadosAtualizados, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             },
@@ -70,6 +72,67 @@ export default function PainelControle() {
 
             .then(Minimizar(consulta))
     }
+
+    function listarLocalizacoes() {
+        api.get("/localizacoes", {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+            }
+        })
+
+            .then((resposta) => {
+                if (resposta.status === 200) {
+                    setListaLocalizacoes(resposta.data)
+                }
+            })
+
+            .catch((erro) => console.log(erro))
+    }
+
+    /*  function mapa() {
+         api.get("/localizacoes", {
+             headers: {
+                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+             }
+         })
+             .then(resposta => resposta.json())
+             .then(itens = montarMapa(itens))
+             .catch(erro => console.log(erro))
+ 
+         function montarMapa(itens) {
+             var map = new google.maps.Map(document.getElementById("map"), {
+                 zoom: 10,
+                 center: new google.maps.LatLng(-23.53642760296254, -46.64621432441258),
+                 mapTypeId: google.maps.MapTypeId.ROADMAP
+             });
+ 
+             var infoWindow = new google.maps.InfoWindow();
+ 
+             var marker, i;
+ 
+             for (i = 0; i < itens.length; i++) {
+                 console.log(itens[i].latitude);
+                 marker = new google.maps.Marker({
+                     position: new google.maps.LatLng(
+                         itens[i].latitude,
+                         itens[i].longitude
+                     ),
+                     map: map
+                 });
+ 
+                 google.maps.event.addListener(
+                     marker,
+                     "click",
+                     (function (marker, i) {
+                         return function () {
+                             infoWindow.setContent(itens[i].id);
+                             infoWindow.open(map, marker);
+                         };
+                     })(marker, i)
+                 )
+             };
+         }
+     } */
 
     function manipular(consulta) {
         Maximizar(consulta)
@@ -109,7 +172,7 @@ export default function PainelControle() {
         modal.style.setProperty('display', 'block')
 
         btnConfModal.onclick = function () {
-            axios.delete('http://192.168.3.159:5000/api/consultas/' + id, {
+            api.delete('/consultas/' + id, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
                 },
@@ -139,7 +202,7 @@ export default function PainelControle() {
             dataConsulta: data
         }
 
-        axios.post('http://192.168.3.159:5000/api/consultas', consulta, {
+        api.post('/consultas', consulta, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             },
@@ -155,7 +218,7 @@ export default function PainelControle() {
 
 
     function listarConsultas() {
-        axios('http://192.168.3.159:5000/api/consultas', {
+        api.get('/consultas', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             }
@@ -170,7 +233,7 @@ export default function PainelControle() {
     }
 
     function listarPacientes() {
-        axios('http://192.168.3.159:5000/api/pacientes', {
+        api.get('/pacientes', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             }
@@ -187,7 +250,7 @@ export default function PainelControle() {
     }
 
     function listarMedicos() {
-        axios('http://192.168.3.159:5000/api/medicos', {
+        api.get('/medicos', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             }
@@ -201,7 +264,7 @@ export default function PainelControle() {
     }
 
     function listarSituacoes() {
-        axios('http://192.168.3.159:5000/api/situacoes', {
+        api.get('/situacoes', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             }
@@ -263,6 +326,7 @@ export default function PainelControle() {
 
     }
 
+    useEffect(listarLocalizacoes, [])
     useEffect(listarConsultas, [])
     useEffect(listarPacientes, [])
     useEffect(listarMedicos, [])
@@ -272,7 +336,7 @@ export default function PainelControle() {
         <div>
             <header>
                 <div className="grid container-header">
-                <Link to="/"> <img src={logo} alt="" /></Link>
+                    <Link to="/"> <img src={logo} alt="" /></Link>
                     <div className="box-pesquisa">
                         <button onClick={Logout}>Logout</button>
                         <div>
@@ -378,6 +442,13 @@ export default function PainelControle() {
                             </form>
                         </div>
                     </div>
+                </section>
+                <section className="data">
+                    <h2>consultas</h2>
+                    {/* <Map style={{width: '100%', height: '100%', position: 'relative'}}>
+                        
+                    </Map> */}
+
                 </section>
                 <section className="buscas">
                     <div className="container-buscas grid">
@@ -516,3 +587,7 @@ export default function PainelControle() {
         </div>
     )
 }
+
+export default GoogleApiWrapper({
+    apiKey: ("AIzaSyAuZv2r6mZQhAVJIRq3bljJJfK693BqiV8")
+})(PainelControle)

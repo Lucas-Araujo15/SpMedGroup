@@ -586,8 +586,28 @@ h1{
     cursor: pointer;
   }
 
+.data{
+    width: 100%;
+    height: 1000px;
+    justify-content: space-evenly;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.data h2{
+    font-family: 'Poppins';
+    font-size: 91px;
+    color: #4EC596;
+    font-weight: normal;
+    text-transform: uppercase;
+}
 
-
+.mapa{
+    background-color: #36936E;
+    width: 1000px;
+    border-radius: 30px;
+    height: 775px;
+}
 
 

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import api from '../../services/api'
 import { parseJwt } from '../../services/auth'
 import { Component } from 'react'
 import logo from '../../assets/img/logo_spmedgroup_v1 1.png'
@@ -9,8 +9,10 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: 'roberto.possarle@spmedicalgroup.com.br',
-            senha: 'roJKL123',
+            email: 'saulo@email.com',
+            senha: 'soABC123',
+            //email: 'ricardo.lemos@spmedicalgroup.com.br',
+            //senha: 'roGHI123',
             isLoading: false,
             erroMensagem: ''
         }
@@ -37,7 +39,7 @@ export default class Login extends Component {
             isLoading: true
         })
 
-        axios.post('http://192.168.3.159:5000/api/login', {
+        api.post('/login', {
             email: this.state.email,
             senha: this.state.senha
         })

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from 'axios';
+import api from "../../services/api";
 import '../../assets/styles/medico.css'
 import logo from '../../assets/img/logo_spmedgroup_v1 1.png'
 import johnDoe from '../../assets/img/john-doe.jpg'
@@ -20,7 +20,7 @@ export default function Agendamentos() {
             consultaDesc: descConsulta
         }
 
-        axios.patch('http://192.168.3.159:5000/api/consultas/descricao/' + agendamento.idConsulta, descAtualizada, {
+        api.patch('/consultas/descricao/' + agendamento.idConsulta, descAtualizada, {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             },
@@ -40,7 +40,7 @@ export default function Agendamentos() {
     }
 
     function ListarAgendamentos() {
-        axios('http://192.168.3.159:5000/api/consultas/minhas', {
+        api.get('/consultas/minhas', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             },
