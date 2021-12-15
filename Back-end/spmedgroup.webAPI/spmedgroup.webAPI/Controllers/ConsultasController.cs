@@ -17,10 +17,12 @@ namespace spmedgroup.webAPI.Controllers
     public class ConsultasController : ControllerBase
     {
         private IConsultaRepository consultaRepository { get; set; }
+        private ILocalizacaoRepository localizacaoRepository { get; set; }
 
         public ConsultasController()
         {
             consultaRepository = new ConsultaRepository();
+            localizacaoRepository = new LocalizacaoRepository();
         }
 
         [Authorize(Roles = "2,3")]

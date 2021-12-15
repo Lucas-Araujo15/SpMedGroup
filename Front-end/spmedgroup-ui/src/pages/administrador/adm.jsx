@@ -8,7 +8,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 //import Select from 'react-select'
 
-function PainelControle() {
+function PainelControle(props) {
     const [listaConsultas, setListaConsultas] = useState([]);
     const [listaSituacoes, setListaSituacoes] = useState([]);
     const [idPaciente, setPaciente] = useState(0);
@@ -71,6 +71,7 @@ function PainelControle() {
             .then(limparStates)
 
             .then(Minimizar(consulta))
+
     }
 
     function listarLocalizacoes() {
@@ -81,12 +82,15 @@ function PainelControle() {
         })
 
             .then((resposta) => {
-                if (resposta.status === 200) {
+                if (resposta.status == 200) {
                     setListaLocalizacoes(resposta.data)
                 }
             })
 
             .catch((erro) => console.log(erro))
+
+
+            console.log(listaLocalizacoes)
     }
 
     /*  function mapa() {
@@ -230,6 +234,8 @@ function PainelControle() {
             })
 
             .catch((erro) => console.log(erro))
+
+            console.log(listaConsultas)
     }
 
     function listarPacientes() {
@@ -244,8 +250,6 @@ function PainelControle() {
                 }
             })
             .catch((erro) => console.log(erro));
-
-        console.log(listaConsultas)
 
     }
 
@@ -445,10 +449,18 @@ function PainelControle() {
                 </section>
                 <section className="data">
                     <h2>consultas</h2>
-                    {/* <Map style={{width: '100%', height: '100%', position: 'relative'}}>
-                        
-                    </Map> */}
-
+                    <div className="mapa">
+                        <Map
+                            google={props.google}
+                            zoom={12}
+                            initialCenter={{ lat: -23.53642760296254, lng: -46.64621432441258 }}
+                        >
+                            <Marker
+                                title={'The marker`s title will appear as a tooltip.'}
+                                name={'SOMA'}
+                                position={{ lat: -23.53620141413947, lng: -46.646267975421026 }} />
+                        </Map>
+                    </div>
                 </section>
                 <section className="buscas">
                     <div className="container-buscas grid">
@@ -589,5 +601,5 @@ function PainelControle() {
 }
 
 export default GoogleApiWrapper({
-    apiKey: ("AIzaSyAuZv2r6mZQhAVJIRq3bljJJfK693BqiV8")
+    apiKey: ("AIzaSyDBAKlR7YNlROT-q03Ra_Qpl_n_NiQRmdQ")
 })(PainelControle)

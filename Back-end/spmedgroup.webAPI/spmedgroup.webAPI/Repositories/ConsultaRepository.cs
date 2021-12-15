@@ -71,27 +71,6 @@ namespace spmedgroup.webAPI.Repositories
 
         public void Cadastrar(Consultum consulta)
         {
-            int idade = DateTime.Now.Year - Convert.ToDateTime(consulta.IdPacienteNavigation.DataNascPaciente).Year;
-            if (DateTime.Now.DayOfYear < Convert.ToDateTime(consulta.IdPacienteNavigation.DataNascPaciente).DayOfYear)
-            {
-                idade--;
-            }
-
-            var locationService = new GoogleLocationService();
-            var point = locationService.GetLatLongFromAddress(consulta.IdPacienteNavigation.EndPaciente);
-
-            Localizacao localicazao = new()
-            {
-                IdadePaciente = Convert.ToString(idade),
-                Descricao = consulta.ConsultaDesc,
-                EspecialidadeMedico = consulta.IdMedicoNavigation.IdEspecialidadeNavigation.NomeEspecialidade,
-                Latitude = Convert.ToString(point.Latitude),
-                Longitude = Convert.ToString(point.Longitude)              
-            };
-
-            LocalizacaoRepository localizacaoRepository = new();
-
-            localizacaoRepository.Cadastrar(localicazao);
             ctx.Consulta.Add(consulta);
             ctx.SaveChanges();
         }
@@ -155,7 +134,6 @@ namespace spmedgroup.webAPI.Repositories
 
         public List<Consultum> ListarTodos()
         {
-
             return ctx.Consulta.Select(c => new Consultum()
             {
                 IdConsulta = c.IdConsulta,

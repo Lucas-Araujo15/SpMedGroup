@@ -21,6 +21,6 @@ namespace spmedgroup.webAPI.Interfaces
         /// Cadastra uma nova localização
         /// </summary>
         /// <param name="novaLocalizacao">Objeto Localizacao a ser cadastrado</param>
-        void Cadastrar(Localizacao novaLocalizacao);
+        void Cadastrar();
     }
 }
