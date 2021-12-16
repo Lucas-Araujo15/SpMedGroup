@@ -13,7 +13,6 @@ function PainelControle(props) {
     const [listaConsultas, setListaConsultas] = useState([]);
     const [listaSituacoes, setListaSituacoes] = useState([]);
     const [idPaciente, setPaciente] = useState(0);
-    const [localPaciente, setLocalPaciente] = useState("teste")
     const [idMedico, setMedico] = useState(0);
     const [idSituacao, setSituacao] = useState(0);
     const [data, setData] = useState(new Date());
@@ -24,6 +23,8 @@ function PainelControle(props) {
         descricaoConsulta: '',
         idConsulta: 0
     })
+    const [localPaciente, setLocalPaciente] = useState({})
+    const [localMedico, setLocalMedico] = useState({})
 
     const history = useHistory()
 
@@ -100,39 +101,46 @@ function PainelControle(props) {
         console.log(listaLocalizacoes)
     }
 
-    function CadastrarLocalizacoes() {
-        var medico
-        api.get('/pacientes/' + idPaciente, {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
-            }
-        })
-            .then((resposta) => {
-                if (resposta.status === 200) {
-                    console.log("foi")
-                    console.log(resposta.data.endPaciente)
-                    
+    function CadastrarLocalizacoes(event) {
+        event.preventDefault();
+        BuscarPaciente();
 
-
+        function BuscarPaciente() {
+            api.get('/pacientes/' + idPaciente, {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
                 }
             })
+                .then((resposta) => {
+                    if (resposta.status === 200) {
+                        console.log("foi")
+                        console.log(resposta.data)
+                        setLocalPaciente(resposta.data)
+                        BuscarMedico()
+                    }
+                })
 
-            .catch((erro) => console.log(erro))
-            console.log(localPaciente)
+                .catch((erro) => console.log(erro))
+        }
 
+        function BuscarMedico() {
 
-        api.get('/medicos/' + idMedico, {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
-            }
-        })
-            .then((resposta) => {
-                if (resposta.status === 200) {
-                    medico = resposta.data
+            api.get('/medicos/' + idMedico, {
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
                 }
             })
+                .then((resposta) => {
+                    if (resposta.status === 200) {
+                        setLocalMedico(resposta.data)
+                    }
+                })
+                .catch((erro) => console.log(erro))
+        }
 
-            .catch((erro) => console.log(erro))
+
+        console.log("testando")
+        console.log(localPaciente)
 
         let endereco = localPaciente.endPaciente
 
@@ -141,7 +149,7 @@ function PainelControle(props) {
         let latitude
         let longitude
 
-        axios("https://maps.googleapis.com/maps/api/geocode/json?address=" + enderecoRequest + "&key=AIzaSyCET-ugTuLG3qBfEvHrK-mNPciN8oFCObQ")
+        axios("https://maps.googleapis.com/maps/api/geocode/json?address=" + enderecoRequest + "&key=AIzaSyAxKlkKTaI4vfTRlaXLneNrXTF9ofKuZrI")
             .then((resposta) => {
                 if (resposta.status === 200) {
                     latitude = resposta.data.results.geometry.location.lat.toString()
@@ -154,7 +162,7 @@ function PainelControle(props) {
             Longitude: longitude,
             Descricao: consultaRecente.descricaoConsulta,
             IdConsulta: consultaRecente.idConsulta.toString(),
-            EspecialidadeMedico: medico.IdEspecialidadeNavigation.NomeEspecialidade[0]
+            EspecialidadeMedico: localMedico.IdEspecialidadeNavigation.NomeEspecialidade[0]
         }
 
         api.post("/localizacoes", localizacao, {
@@ -638,5 +646,5 @@ function PainelControle(props) {
 }
 
 export default GoogleApiWrapper({
-    apiKey: ("AIzaSyCET-ugTuLG3qBfEvHrK-mNPciN8oFCObQ")
+    apiKey: ("AIzaSyAxKlkKTaI4vfTRlaXLneNrXTF9ofKuZrI")
 })(PainelControle)
