@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using spmedgroup.webAPI.Domains;
 using spmedgroup.webAPI.Interfaces;
 using spmedgroup.webAPI.Repositories;
 using System;
@@ -28,7 +29,6 @@ namespace spmedgroup.webAPI.Controllers
         {
             try
             {
-                localizacaoRepository.Cadastrar();
                 return Ok(localizacaoRepository.ListarTodas());
             }
             catch (Exception ex)
@@ -36,6 +36,21 @@ namespace spmedgroup.webAPI.Controllers
                 return BadRequest(ex);
             }
             
+        }
+
+        [HttpPost]
+        public IActionResult Cadastrar(Localizacao novaLocalizacao)
+        {
+            try
+            {
+                localizacaoRepository.Cadastrar(novaLocalizacao);
+                return StatusCode(201);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+
         }
     }
 }

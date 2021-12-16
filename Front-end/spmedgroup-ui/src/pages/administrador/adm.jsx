@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 import api from "../../services/api";
 import '../../assets/styles/adm.css'
 import logo from '../../assets/img/logo_spmedgroup_v1 1.png'
 import johnDoe from '../../assets/img/john-doe.jpg'
 import { Link, useHistory } from 'react-router-dom';
+import axios from "axios";
 
 //import Select from 'react-select'
 
@@ -12,12 +13,18 @@ function PainelControle(props) {
     const [listaConsultas, setListaConsultas] = useState([]);
     const [listaSituacoes, setListaSituacoes] = useState([]);
     const [idPaciente, setPaciente] = useState(0);
+    const [localPaciente, setLocalPaciente] = useState("teste")
     const [idMedico, setMedico] = useState(0);
     const [idSituacao, setSituacao] = useState(0);
     const [data, setData] = useState(new Date());
     const [listaPacientes, setListaPacientes] = useState([]);
     const [listaMedicos, setListaMedicos] = useState([]);
     const [listaLocalizacoes, setListaLocalizacoes] = useState([])
+    const [consultaRecente, setConsultaRecente] = useState({
+        descricaoConsulta: '',
+        idConsulta: 0
+    })
+
     const history = useHistory()
 
 
@@ -90,53 +97,74 @@ function PainelControle(props) {
             .catch((erro) => console.log(erro))
 
 
-            console.log(listaLocalizacoes)
+        console.log(listaLocalizacoes)
     }
 
-    /*  function mapa() {
-         api.get("/localizacoes", {
-             headers: {
-                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
-             }
-         })
-             .then(resposta => resposta.json())
-             .then(itens = montarMapa(itens))
-             .catch(erro => console.log(erro))
- 
-         function montarMapa(itens) {
-             var map = new google.maps.Map(document.getElementById("map"), {
-                 zoom: 10,
-                 center: new google.maps.LatLng(-23.53642760296254, -46.64621432441258),
-                 mapTypeId: google.maps.MapTypeId.ROADMAP
-             });
- 
-             var infoWindow = new google.maps.InfoWindow();
- 
-             var marker, i;
- 
-             for (i = 0; i < itens.length; i++) {
-                 console.log(itens[i].latitude);
-                 marker = new google.maps.Marker({
-                     position: new google.maps.LatLng(
-                         itens[i].latitude,
-                         itens[i].longitude
-                     ),
-                     map: map
-                 });
- 
-                 google.maps.event.addListener(
-                     marker,
-                     "click",
-                     (function (marker, i) {
-                         return function () {
-                             infoWindow.setContent(itens[i].id);
-                             infoWindow.open(map, marker);
-                         };
-                     })(marker, i)
-                 )
-             };
-         }
-     } */
+    function CadastrarLocalizacoes() {
+        var medico
+        api.get('/pacientes/' + idPaciente, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+            }
+        })
+            .then((resposta) => {
+                if (resposta.status === 200) {
+                    console.log("foi")
+                    console.log(resposta.data.endPaciente)
+                    
+
+
+                }
+            })
+
+            .catch((erro) => console.log(erro))
+            console.log(localPaciente)
+
+
+        api.get('/medicos/' + idMedico, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+            }
+        })
+            .then((resposta) => {
+                if (resposta.status === 200) {
+                    medico = resposta.data
+                }
+            })
+
+            .catch((erro) => console.log(erro))
+
+        let endereco = localPaciente.endPaciente
+
+        let enderecoRequest = endereco.split(" ").join("+")
+
+        let latitude
+        let longitude
+
+        axios("https://maps.googleapis.com/maps/api/geocode/json?address=" + enderecoRequest + "&key=AIzaSyCET-ugTuLG3qBfEvHrK-mNPciN8oFCObQ")
+            .then((resposta) => {
+                if (resposta.status === 200) {
+                    latitude = resposta.data.results.geometry.location.lat.toString()
+                    longitude = resposta.data.results.geometry.location.lng.toString()
+                }
+            })
+
+        let localizacao = {
+            Latitude: latitude,
+            Longitude: longitude,
+            Descricao: consultaRecente.descricaoConsulta,
+            IdConsulta: consultaRecente.idConsulta.toString(),
+            EspecialidadeMedico: medico.IdEspecialidadeNavigation.NomeEspecialidade[0]
+        }
+
+        api.post("/localizacoes", localizacao, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+            }
+        })
+
+        listaLocalizacoes()
+    }
 
     function manipular(consulta) {
         Maximizar(consulta)
@@ -217,7 +245,16 @@ function PainelControle(props) {
 
             .then(listarConsultas)
 
+            .then(CadastrarLocalizacoes)
+
             .then(limparStates)
+
+        let ultimoCadastro = listaConsultas[listaConsultas.length - 1]
+
+        setConsultaRecente({
+            descricaoConsulta: ultimoCadastro.consultaDesc,
+            idConsulta: ultimoCadastro.idConsulta
+        })
     }
 
 
@@ -235,7 +272,7 @@ function PainelControle(props) {
 
             .catch((erro) => console.log(erro))
 
-            console.log(listaConsultas)
+        console.log(listaConsultas)
     }
 
     function listarPacientes() {
@@ -601,5 +638,5 @@ function PainelControle(props) {
 }
 
 export default GoogleApiWrapper({
-    apiKey: ("AIzaSyDBAKlR7YNlROT-q03Ra_Qpl_n_NiQRmdQ")
+    apiKey: ("AIzaSyCET-ugTuLG3qBfEvHrK-mNPciN8oFCObQ")
 })(PainelControle)

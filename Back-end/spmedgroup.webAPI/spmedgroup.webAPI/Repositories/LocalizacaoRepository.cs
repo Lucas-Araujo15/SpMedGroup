@@ -20,54 +20,50 @@ namespace spmedgroup.webAPI.Repositories
             _localizacoes = database.GetCollection<Localizacao>("localidades");
         }
 
-        public void Cadastrar()
+        public void Cadastrar(Localizacao localizacao)
 
         {
-            
+            //ConsultaRepository consultaRepository = new ConsultaRepository();
+            //List<Consultum> listaConsultas = consultaRepository.ListarTodos();
 
-            ConsultaRepository consultaRepository = new ConsultaRepository();
-            List<Consultum> listaConsultas = consultaRepository.ListarTodos();
+            //foreach (Consultum item in listaConsultas)
+            //{
+            //    if (_localizacoes.Find(local => Convert.ToInt32(local.idConsulta) == item.IdConsulta).ToList().Count() <= 0)
+            //    {
 
-            foreach (Consultum item in listaConsultas)
-            {
-                //if (_localizacoes.Find(local => Convert.ToInt32(local.idConsulta) == item.IdConsulta).ToList().Count() <= 0)
-                //{
+            //    }
 
-                //}
+            //    int idade = DateTime.Now.Year - Convert.ToDateTime(item.IdPacienteNavigation.DataNascPaciente).Year;
+            //    if (DateTime.Now.DayOfYear < Convert.ToDateTime(item.IdPacienteNavigation.DataNascPaciente).DayOfYear)
+            //    {
+            //        idade = idade - 1;
+            //    }
 
-                int idade = DateTime.Now.Year - Convert.ToDateTime(item.IdPacienteNavigation.DataNascPaciente).Year;
-                if (DateTime.Now.DayOfYear < Convert.ToDateTime(item.IdPacienteNavigation.DataNascPaciente).DayOfYear)
-                {
-                    idade = idade - 1;
-                }
+            //    var locationService = new GoogleLocationService();
+            //    var point = locationService.GetLatLongFromAddress(item.IdPacienteNavigation.EndPaciente);
 
-                var locationService = new GoogleLocationService();
-                var point = locationService.GetLatLongFromAddress(item.IdPacienteNavigation.EndPaciente);
-
-                Localizacao novaLocalizacao = new Localizacao()
-                {
-                    IdadePaciente = Convert.ToString(idade),
-                    Descricao = item.ConsultaDesc,
-                    EspecialidadeMedico = item.IdMedicoNavigation.IdEspecialidadeNavigation.NomeEspecialidade,
-                    Latitude = Convert.ToString(point.Latitude),
-                    Longitude = Convert.ToString(point.Longitude)
-                };
+            //    Localizacao novaLocalizacao = new Localizacao()
+            //    {
+            //        IdadePaciente = Convert.ToString(idade),
+            //        Descricao = item.ConsultaDesc,
+            //        EspecialidadeMedico = item.IdMedicoNavigation.IdEspecialidadeNavigation.NomeEspecialidade,
+            //        Latitude = Convert.ToString(point.Latitude),
+            //        Longitude = Convert.ToString(point.Longitude)
+            //    };
 
 
 
-                //Localizacao novaLocalizacao = new()
-                //{
-                //    IdadePaciente = "10",
-                //    Descricao = "testando",
-                //    idConsulta = "5000",
-                //    EspecialidadeMedico = "Ortopedia",
-                //    Latitude = "-23.53642760296254",
-                //    Longitude = "-46.64621432441258"
-                //};
+            //    localizacao novalocalizacao = new()
+            //    {
+            //        idadepaciente = "10",
+            //        descricao = "testando",
+            //        idconsulta = "5000",
+            //        especialidademedico = "ortopedia",
+            //        latitude = "-23.53642760296254",
+            //        longitude = "-46.64621432441258"
+            //    };
 
-                _localizacoes.InsertOne(novaLocalizacao);
-
-            }
+            _localizacoes.InsertOne(localizacao);
         }
 
         public List<Localizacao> ListarTodas()

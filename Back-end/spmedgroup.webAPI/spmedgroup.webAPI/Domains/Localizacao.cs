@@ -17,7 +17,7 @@ namespace spmedgroup.webAPI.Domains
 
         public string Descricao { get; set; }
 
-        public string idConsulta { get; set; }
+        public string IdConsulta { get; set; }
 
         public string IdadePaciente { get; set; }
 
