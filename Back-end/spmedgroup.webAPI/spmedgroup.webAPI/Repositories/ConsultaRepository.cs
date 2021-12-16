@@ -165,6 +165,7 @@ namespace spmedgroup.webAPI.Repositories
                     RgPaciente = c.IdPacienteNavigation.RgPaciente,
                     CpfPaciente = c.IdPacienteNavigation.CpfPaciente,
                     TelPaciente = c.IdPacienteNavigation.TelPaciente,
+                    EndPaciente = c.IdPacienteNavigation.EndPaciente
                 },
 
                 IdSituacaoNavigation = new Situacao()

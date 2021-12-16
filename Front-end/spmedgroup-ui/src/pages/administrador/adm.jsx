@@ -19,12 +19,6 @@ function PainelControle(props) {
     const [listaPacientes, setListaPacientes] = useState([]);
     const [listaMedicos, setListaMedicos] = useState([]);
     const [listaLocalizacoes, setListaLocalizacoes] = useState([])
-    const [consultaRecente, setConsultaRecente] = useState({
-        descricaoConsulta: '',
-        idConsulta: 0
-    })
-    const [localPaciente, setLocalPaciente] = useState({})
-    const [localMedico, setLocalMedico] = useState({})
 
     const history = useHistory()
 
@@ -101,47 +95,72 @@ function PainelControle(props) {
         console.log(listaLocalizacoes)
     }
 
-    function CadastrarLocalizacoes(event) {
-        event.preventDefault();
-        BuscarPaciente();
+    function CadastrarLocalizacoes() {
+        let ultimoCadastro = listaConsultas[listaConsultas.length - 1]
+        console.log(ultimoCadastro)
+        let endereco = ultimoCadastro.idPacienteNavigation.endPaciente
+        let enderecoRequest = endereco.split(" ").join("+")
 
-        function BuscarPaciente() {
-            api.get('/pacientes/' + idPaciente, {
-                headers: {
-                    Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+        var latitude
+        var longitude
+
+        axios("https://maps.googleapis.com/maps/api/geocode/json?address=" + enderecoRequest + "&key=AIzaSyAxKlkKTaI4vfTRlaXLneNrXTF9ofKuZrI")
+            .then((resposta) => {
+                if (resposta.status === 200) {
+                    latitude = resposta.data.results[0].geometry.location.lat
+                    longitude = resposta.data.results[0].geometry.location.lng
                 }
-            })
-                .then((resposta) => {
-                    if (resposta.status === 200) {
-                        console.log("foi")
-                        console.log(resposta.data)
-                        setLocalPaciente(resposta.data)
-                        BuscarMedico()
+
+                console.log(latitude)
+
+                let localizacao = {
+                    Latitude: latitude,
+                    Longitude: longitude,
+                    Descricao: ultimoCadastro.descricaoConsulta,
+                    IdConsulta: ultimoCadastro.idConsulta.toString(),
+                    EspecialidadeMedico: ultimoCadastro.idMedicoNavigation.idEspecialidadeNavigation.nomeEspecialidade
+                }
+
+                api.post("/localizacoes", localizacao, {
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
                     }
                 })
 
-                .catch((erro) => console.log(erro))
-        }
+                    .then(listarLocalizacoes())
+            })
 
-        function BuscarMedico() {
 
-            api.get('/medicos/' + idMedico, {
-                headers: {
-                    Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+
+
+        /* api.get('/pacientes/' + idPaciente, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+            }
+        })
+            .then((resposta) => {
+                if (resposta.status === 200) {
+                    setLocalPaciente(resposta.data)
                 }
             })
-                .then((resposta) => {
-                    if (resposta.status === 200) {
-                        setLocalMedico(resposta.data)
-                    }
-                })
-                .catch((erro) => console.log(erro))
-        }
 
+            .catch((erro) => console.log(erro))
 
-        console.log("testando")
+        api.get('/medicos/' + idMedico, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+            }
+        })
+            .then((resposta) => {
+                if (resposta.status === 200) {
+                    setLocalMedico(resposta.data)
+                }
+            })
+
+            .catch((erro) => console.log(erro))
+
+        console.log("foi")
         console.log(localPaciente)
-
         let endereco = localPaciente.endPaciente
 
         let enderecoRequest = endereco.split(" ").join("+")
@@ -171,8 +190,9 @@ function PainelControle(props) {
             }
         })
 
-        listaLocalizacoes()
+        listaLocalizacoes() */
     }
+
 
     function manipular(consulta) {
         Maximizar(consulta)
@@ -257,12 +277,7 @@ function PainelControle(props) {
 
             .then(limparStates)
 
-        let ultimoCadastro = listaConsultas[listaConsultas.length - 1]
 
-        setConsultaRecente({
-            descricaoConsulta: ultimoCadastro.consultaDesc,
-            idConsulta: ultimoCadastro.idConsulta
-        })
     }
 
 
@@ -500,10 +515,15 @@ function PainelControle(props) {
                             zoom={12}
                             initialCenter={{ lat: -23.53642760296254, lng: -46.64621432441258 }}
                         >
-                            <Marker
-                                title={'The marker`s title will appear as a tooltip.'}
-                                name={'SOMA'}
-                                position={{ lat: -23.53620141413947, lng: -46.646267975421026 }} />
+                            {
+                                listaLocalizacoes.map((local) => {
+                                    return (
+                                        <Marker
+                                            position={{ lat: local.latitude, lng: local.longitude }} />
+                                    )
+                                })
+                            }
+
                         </Map>
                     </div>
                 </section>

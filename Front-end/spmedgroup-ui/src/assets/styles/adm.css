@@ -607,7 +607,9 @@ h1{
     background-color: #36936E;
     width: 100%;
     border-radius: 30px;
-    margin-bottom: 700px;
+    position: relative;
+    height: 40vw;
+    z-index: 0;
 }
 
 
