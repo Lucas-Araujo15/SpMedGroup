@@ -59,11 +59,7 @@ function PainelControle(props) {
             dataConsulta: data
         }
 
-        api.put('/consultas/' + consulta.idConsulta, dadosAtualizados, {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
-            },
-        })
+        axios.put('https://6204f8ac161670001741b130.mockapi.io/consulta/' + consulta.idConsulta, dadosAtualizados)
             .catch((erro) => {
                 console.log(erro)
             })
@@ -95,103 +91,103 @@ function PainelControle(props) {
         console.log(listaLocalizacoes)
     }
 
-    function CadastrarLocalizacoes() {
-        let ultimoCadastro = listaConsultas[listaConsultas.length - 1]
-        console.log(ultimoCadastro)
-        let endereco = ultimoCadastro.idPacienteNavigation.endPaciente
-        let enderecoRequest = endereco.split(" ").join("+")
+    // function CadastrarLocalizacoes() {
+    //     let ultimoCadastro = listaConsultas[listaConsultas.length - 1]
+    //     console.log(ultimoCadastro)
+    //     let endereco = ultimoCadastro.idPacienteNavigation.endPaciente
+    //     let enderecoRequest = endereco.split(" ").join("+")
 
-        var latitude
-        var longitude
+    //     var latitude
+    //     var longitude
 
-        axios("https://maps.googleapis.com/maps/api/geocode/json?address=" + enderecoRequest + "&key=AIzaSyAxKlkKTaI4vfTRlaXLneNrXTF9ofKuZrI")
-            .then((resposta) => {
-                if (resposta.status === 200) {
-                    latitude = resposta.data.results[0].geometry.location.lat
-                    longitude = resposta.data.results[0].geometry.location.lng
-                }
+    //     axios("https://maps.googleapis.com/maps/api/geocode/json?address=" + enderecoRequest + "&key=AIzaSyAxKlkKTaI4vfTRlaXLneNrXTF9ofKuZrI")
+    //         .then((resposta) => {
+    //             if (resposta.status === 200) {
+    //                 latitude = resposta.data.results[0].geometry.location.lat
+    //                 longitude = resposta.data.results[0].geometry.location.lng
+    //             }
 
-                console.log(latitude)
+    //             console.log(latitude)
 
-                let localizacao = {
-                    Latitude: latitude,
-                    Longitude: longitude,
-                    Descricao: ultimoCadastro.descricaoConsulta,
-                    IdConsulta: ultimoCadastro.idConsulta.toString(),
-                    EspecialidadeMedico: ultimoCadastro.idMedicoNavigation.idEspecialidadeNavigation.nomeEspecialidade
-                }
+    //             let localizacao = {
+    //                 Latitude: latitude,
+    //                 Longitude: longitude,
+    //                 Descricao: ultimoCadastro.descricaoConsulta,
+    //                 IdConsulta: ultimoCadastro.idConsulta.toString(),
+    //                 EspecialidadeMedico: ultimoCadastro.idMedicoNavigation.idEspecialidadeNavigation.nomeEspecialidade
+    //             }
 
-                api.post("/localizacoes", localizacao, {
-                    headers: {
-                        Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
-                    }
-                })
+    //             api.post("/localizacoes", localizacao, {
+    //                 headers: {
+    //                     Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+    //                 }
+    //             })
 
-                    .then(listarLocalizacoes())
-            })
-
-
+    //                 .then(listarLocalizacoes())
+    //         })
 
 
-        /* api.get('/pacientes/' + idPaciente, {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
-            }
-        })
-            .then((resposta) => {
-                if (resposta.status === 200) {
-                    setLocalPaciente(resposta.data)
-                }
-            })
 
-            .catch((erro) => console.log(erro))
 
-        api.get('/medicos/' + idMedico, {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
-            }
-        })
-            .then((resposta) => {
-                if (resposta.status === 200) {
-                    setLocalMedico(resposta.data)
-                }
-            })
+    //     /* api.get('/pacientes/' + idPaciente, {
+    //         headers: {
+    //             Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+    //         }
+    //     })
+    //         .then((resposta) => {
+    //             if (resposta.status === 200) {
+    //                 setLocalPaciente(resposta.data)
+    //             }
+    //         })
 
-            .catch((erro) => console.log(erro))
+    //         .catch((erro) => console.log(erro))
 
-        console.log("foi")
-        console.log(localPaciente)
-        let endereco = localPaciente.endPaciente
+    //     api.get('/medicos/' + idMedico, {
+    //         headers: {
+    //             Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+    //         }
+    //     })
+    //         .then((resposta) => {
+    //             if (resposta.status === 200) {
+    //                 setLocalMedico(resposta.data)
+    //             }
+    //         })
 
-        let enderecoRequest = endereco.split(" ").join("+")
+    //         .catch((erro) => console.log(erro))
 
-        let latitude
-        let longitude
+    //     console.log("foi")
+    //     console.log(localPaciente)
+    //     let endereco = localPaciente.endPaciente
 
-        axios("https://maps.googleapis.com/maps/api/geocode/json?address=" + enderecoRequest + "&key=AIzaSyAxKlkKTaI4vfTRlaXLneNrXTF9ofKuZrI")
-            .then((resposta) => {
-                if (resposta.status === 200) {
-                    latitude = resposta.data.results.geometry.location.lat.toString()
-                    longitude = resposta.data.results.geometry.location.lng.toString()
-                }
-            })
+    //     let enderecoRequest = endereco.split(" ").join("+")
 
-        let localizacao = {
-            Latitude: latitude,
-            Longitude: longitude,
-            Descricao: consultaRecente.descricaoConsulta,
-            IdConsulta: consultaRecente.idConsulta.toString(),
-            EspecialidadeMedico: localMedico.IdEspecialidadeNavigation.NomeEspecialidade[0]
-        }
+    //     let latitude
+    //     let longitude
 
-        api.post("/localizacoes", localizacao, {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
-            }
-        })
+    //     axios("https://maps.googleapis.com/maps/api/geocode/json?address=" + enderecoRequest + "&key=AIzaSyAxKlkKTaI4vfTRlaXLneNrXTF9ofKuZrI")
+    //         .then((resposta) => {
+    //             if (resposta.status === 200) {
+    //                 latitude = resposta.data.results.geometry.location.lat.toString()
+    //                 longitude = resposta.data.results.geometry.location.lng.toString()
+    //             }
+    //         })
 
-        listaLocalizacoes() */
-    }
+    //     let localizacao = {
+    //         Latitude: latitude,
+    //         Longitude: longitude,
+    //         Descricao: consultaRecente.descricaoConsulta,
+    //         IdConsulta: consultaRecente.idConsulta.toString(),
+    //         EspecialidadeMedico: localMedico.IdEspecialidadeNavigation.NomeEspecialidade[0]
+    //     }
+
+    //     api.post("/localizacoes", localizacao, {
+    //         headers: {
+    //             Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
+    //         }
+    //     })
+
+    //     listaLocalizacoes() */
+    // }
 
 
     function manipular(consulta) {
@@ -232,7 +228,7 @@ function PainelControle(props) {
         modal.style.setProperty('display', 'block')
 
         btnConfModal.onclick = function () {
-            api.delete('/consultas/' + id, {
+            axios.delete('https://6204f8ac161670001741b130.mockapi.io/consulta/' + id, {
                 headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
                 },
@@ -262,18 +258,12 @@ function PainelControle(props) {
             dataConsulta: data
         }
 
-        api.post('/consultas', consulta, {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
-            },
-        })
+        axios.post('https://6204f8ac161670001741b130.mockapi.io/consulta', consulta)
             .catch((erro) => {
                 console.log(erro)
             })
 
             .then(listarConsultas)
-
-            .then(CadastrarLocalizacoes)
 
             .then(limparStates)
 
@@ -282,11 +272,7 @@ function PainelControle(props) {
 
 
     function listarConsultas() {
-        api.get('/consultas', {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
-            }
-        })
+        axios.get('https://6204f8ac161670001741b130.mockapi.io/consulta')
             .then((resposta) => {
                 if (resposta.status === 200) {
                     setListaConsultas(resposta.data)
@@ -299,7 +285,7 @@ function PainelControle(props) {
     }
 
     function listarPacientes() {
-        api.get('/pacientes', {
+        axios.get('https://6204f8ac161670001741b130.mockapi.io/paciente', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             }
@@ -314,7 +300,7 @@ function PainelControle(props) {
     }
 
     function listarMedicos() {
-        api.get('/medicos', {
+        axios.get('https://6204f8ac161670001741b130.mockapi.io/medico', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             }
@@ -477,7 +463,7 @@ function PainelControle(props) {
 
                                         </select>
                                     </div>
-                                    <div>
+                                    {/* <div>
                                         <label for="">Situação:</label>
                                         <select onChange={s => situacaoEscolhida(s)} name="" id="">
                                             <option value="0" selected disabled>Selecione uma situação</option>
@@ -491,7 +477,7 @@ function PainelControle(props) {
                                             }
                                         </select>
 
-                                    </div>
+                                    </div> */}
                                     <div>
                                         <label for="">Data:</label>
                                         <input type="datetime-local" onChange={d => dataEscolhida(d)} />
@@ -546,9 +532,9 @@ function PainelControle(props) {
                                 <div key={consulta.idConsulta} id={consulta.idConsulta} className="box-lista2 grid fecharAtualizar">
                                     <div className="status">
                                         <div>
-                                            <p>{consulta.idSituacaoNavigation.situacaoDesc}</p>
+                                            <p>{consulta.idSituacao}</p>
 
-                                            <select onChange={s => situacaoEscolhida(s)} name="" id="">
+                                            {/* <select onChange={s => situacaoEscolhida(s)} name="" id="">
                                                 <option value={consulta.idSituacao} selected disabled>{consulta.idSituacaoNavigation.situacaoDesc}</option>
                                                 {
                                                     listaSituacoes.map((situacao) => {
@@ -558,7 +544,7 @@ function PainelControle(props) {
                                                         )
                                                     })
                                                 }
-                                            </select>
+                                            </select> */}
 
                                         </div>
                                         <div>
@@ -569,10 +555,10 @@ function PainelControle(props) {
                                         <tbody>
                                             <tr id={"input1" + consulta.idConsulta}>
                                                 <th>Paciente:</th>
-                                                <td><p>{consulta.idPacienteNavigation.nomePaciente}</p>
+                                                <td><p>{consulta.idPaciente}</p>
 
                                                     <select onChange={p => pacienteEscolhido(p)} name="" id="">
-                                                        <option value={consulta.idPaciente} selected disabled>{consulta.idPacienteNavigation.nomePaciente}</option>
+                                                        <option value={consulta.idPaciente} selected disabled>{consulta.idPaciente}</option>
                                                         {
                                                             listaPacientes.map((paciente) => {
                                                                 return (
@@ -586,10 +572,10 @@ function PainelControle(props) {
                                             </tr>
                                             <tr id={"input2" + consulta.idConsulta}>
                                                 <th>Médico:</th>
-                                                <td><p>{consulta.idMedicoNavigation.nomeMedico}</p>
+                                                <td><p>{consulta.idMedico}</p>
 
                                                     <select onChange={m => medicoEscolhido(m)} name="" id="">
-                                                        <option value={consulta.idMedico} selected disabled>{consulta.idMedicoNavigation.nomeMedico}</option>
+                                                        <option value={consulta.idMedico} selected disabled>{consulta.idMedico}</option>
                                                         {
                                                             listaMedicos.map((medico) => {
                                                                 return (
@@ -604,15 +590,15 @@ function PainelControle(props) {
                                             </tr>
                                             <tr id={"input3" + consulta.idConsulta}>
                                                 <th>RG do paciente:</th>
-                                                <td>{consulta.idPacienteNavigation.rgPaciente}</td>
+                                                <td>{consulta.idPaciente}</td>
                                             </tr>
                                             <tr id={"input4" + consulta.idConsulta}>
                                                 <th>Telefone do paciente:</th>
-                                                <td>{consulta.idPacienteNavigation.telPaciente}</td>
+                                                <td>{consulta.idPaciente}</td>
                                             </tr>
                                             <tr style={{ display: 'none' }} id={"input5" + consulta.idConsulta}>
                                                 <th>Endereço do paciente:</th>
-                                                <td>{consulta.idPacienteNavigation.endPaciente}</td>
+                                                <td>{consulta.idPaciente}</td>
                                             </tr>
                                             <tr style={{ display: 'none' }} id={"input6" + consulta.idConsulta}>
                                                 <th>Data:</th>
@@ -624,15 +610,15 @@ function PainelControle(props) {
                                             </tr>
                                             <tr style={{ display: 'none' }} id={"input7" + consulta.idConsulta}>
                                                 <th>Especialidade do médico:</th>
-                                                <td>{consulta.idMedicoNavigation.idEspecialidadeNavigation.nomeEspecialidade}</td>
+                                                <td>{consulta.idMedico}</td>
                                             </tr>
                                             <tr style={{ display: 'none' }} id={"input8" + consulta.idConsulta}>
                                                 <th>CRM:</th>
-                                                <td>{consulta.idMedicoNavigation.crm}</td>
+                                                <td>{consulta.idMedico}</td>
                                             </tr>
                                             <tr style={{ display: 'none' }} id={"input9" + consulta.idConsulta}>
                                                 <th>Clínica:</th>
-                                                <td>{consulta.idMedicoNavigation.idClinicaNavigation.nomeFantasia}</td>
+                                                <td>{consulta.idMedico}</td>
                                             </tr>
                                             <tr style={{ display: 'none' }} id={"input10" + consulta.idConsulta}>
                                                 <th>Descrição da consulta:</th>

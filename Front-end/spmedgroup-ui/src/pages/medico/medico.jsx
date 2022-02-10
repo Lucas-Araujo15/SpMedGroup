@@ -40,7 +40,7 @@ export default function Agendamentos() {
     }
 
     function ListarAgendamentos() {
-        api.get('/consultas/minhas', {
+        api.get('/consultas', {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('login-usuario-spmedgp'),
             },

@@ -4,6 +4,7 @@ import { Component } from 'react'
 import logo from '../../assets/img/logo_spmedgroup_v1 1.png'
 import '../../assets/styles/login.css'
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 export default class Login extends Component {
     constructor(props) {
@@ -39,7 +40,7 @@ export default class Login extends Component {
             isLoading: true
         })
 
-        api.post('/login', {
+        axios.post('http://localhost:5000/api/login', {
             email: this.state.email,
             senha: this.state.senha
         })
